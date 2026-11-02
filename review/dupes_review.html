@@ -1,0 +1,1635 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Wokmaster 重复菜谱候选</title>
+<style>
+  :root{--bg:#f6f7f9;--card:#fff;--line:#e3e6ea;--ink:#1c2126;--mute:#6b7683;--accent:#c0392b}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+       font:14px/1.55 -apple-system,"Segoe UI","Microsoft YaHei",sans-serif}
+  header{position:sticky;top:0;z-index:9;background:#fff;border-bottom:1px solid var(--line);
+         padding:12px 20px;display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+  h1{font-size:16px;margin:0}
+  .hint{color:var(--mute);font-size:13px}
+  button{background:var(--accent);color:#fff;border:0;border-radius:6px;padding:8px 14px;
+         font-size:13px;cursor:pointer}
+  main{padding:16px 20px 90px;display:grid;gap:12px}
+  .sec{font-size:14px;margin:14px 0 2px;padding-bottom:6px;border-bottom:2px solid var(--line)}
+  .sec .sub{font-weight:400;font-size:12px;color:var(--mute);margin-left:10px}
+  .group{background:var(--card);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+  .ghead{padding:9px 14px;background:#fafbfc;border-bottom:1px solid var(--line);
+         font-weight:600;font-size:13px;color:var(--mute)}
+  .badge{display:inline-block;margin-left:8px;padding:1px 8px;border-radius:10px;
+         font-weight:500;font-size:11px;background:#eef1f4;color:#556}
+  .badge.mid{background:#fff6e0;color:#8a6100}
+  table{width:100%;border-collapse:collapse}
+  th,td{text-align:left;padding:7px 10px;border-bottom:1px solid #f0f2f5;font-size:13px}
+  th{font-weight:500;color:var(--mute);font-size:12px;background:#fcfcfd}
+  td.zh{font-weight:600}
+  td.base{color:#0a7a3f}
+  .muted{color:var(--mute)}
+  .warn{color:#b8860b}
+  .ings{color:#7a6a00;max-width:300px}
+  tr:last-child td{border-bottom:0}
+  #bar{position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:1px solid var(--line);
+       padding:10px 20px;display:flex;gap:12px;align-items:center}
+  code{background:#f0f2f5;padding:4px 8px;border-radius:4px;font-size:12px;flex:1;
+       white-space:pre-wrap;word-break:break-all;max-height:40px;overflow:auto}
+</style></head><body>
+<header>
+  <h1>重复菜谱候选 · A 91 组 · B 11 组 · C 5 个类名词</h1>
+  <span class="hint">每组选一条要保留的，其余算重复；不选 = 这组不是重复</span>
+  <button id="copy">复制选择</button>
+</header>
+<main><h2 class="sec">A 档 · 91 组 / 187 道<span class="sub">几乎确定是同一道菜，选一条保留</span></h2>
+  <section class="group">
+    <div class="ghead">A1 · 3 道<span class="badge">相似 1.00</span></div>
+    <table><thead><tr><th>选</th><th>中文名</th><th>English</th><th>菜系</th><th>类型</th><th>图片</th><th>主料</th></tr></thead><tbody>
+      <tr><td><input type="radio" name="A1" value="shanghai-scallion-oil-noodles"></td>
+        <td class="zh">开洋葱油拌面</td><td class="muted">Shanghai Scallion Oil Noodles</td>
+        <td class="muted">shanghainese</td><td class="muted">noodle</td>
+        <td class="muted">有图 7/7</td><td class="ings">小葱、干虾米、面条</td></tr>
+      <tr><td><input type="radio" name="A1" value="scallion-oil-noodles-mp"></td>
+        <td class="zh">葱油拌面</td><td class="muted">Scallion Oil Noodles</td>
+        <td class="muted">shanghainese</td><td class="muted">noodle</td>
+        <td class="muted">有图 5/5</td><td class="ings">小葱、面条</td></tr>
+      <tr><td><input type="radio" name="A1" value="private-house-style-scallion-oil-noodles"></td>
+        <td class="zh">私房葱油拌面</td><td class="muted">Private House Style Scallion Oil Noodles</td>
+        <td class="muted">home_style</td><td class="muted">noodle</td>
+        <td class="muted">有图 4/4</td><td class="ings">小葱、面条</td></tr></tbody></table>
+  </section>
+  <section class="group">
+    <div class="ghead">A2 · 2 道<span class="badge">相似 1.00</span></div>
+    <table><thead><tr><th>选</th><th>中文名</th><th>English</th><th>菜系</th><th>类型</th><th>图片</th><th>主料</th></tr></thead><tbody>
+      <tr><td><input type="radio" name="A2" value="signature-spicy-crayfish"></td>
+        <td class="zh">秘制香辣小龙虾</td><td class="muted">Signature Spicy Crayfish</td>
+        <td class="muted">home_style</td><td class="muted">stir_fry</td>
+        <td class="muted">有图 5/5</td><td class="ings">大蒜、小龙虾</td></tr>
+      <tr><td><input type="radio" name="A2" value="thirteen-spice-crawfish"></td>
+        <td class="zh">小龙虾（十三香）</td><td class="muted">Thirteen-Spice Crawfish</td>
+        <td class="muted">shanghainese</td><td class="muted">braise</td>
+        <td class="muted">有图 5/5</td><td class="ings">大蒜、小龙虾</td></tr></tbody></table>
+  </section>
+  <section class="group">
+    <div class="ghead">A3 · 2 道<span class="badge">相似 1.00</span></div>
+    <table><thead><tr><th>选</th><th>中文名</th><th>English</th><th>菜系</th><th>类型</th><th>图片</th><th>主料</th></tr></thead><tbody>
+      <tr><td><input type="radio" name="A3" value="hui-fermented-tofu"></td>
+        <td class="zh">毛豆腐</td><td class="muted">Hui-Style Fermented Tofu</td>
+        <td class="muted">anhui</td><td class="muted">stir_fry</td>
+        <td class="muted">有图 5/5</td><td class="ings">姜、毛豆腐、蒜苗</td></tr>
+      <tr><td><input type="radio" name="A3" value="huizhou-hairy-tofu"></td>
+        <td class="zh">徽州毛豆腐</td><td class="muted">Huizhou Hairy Tofu</td>
+        <td class="muted">anhui</td><td class="muted">stir_fry</td>
+        <td class="muted">有图 5/5</td><td class="ings">姜、毛豆腐、蒜苗</td></tr></tbody></table>
+  </section>
+  <section class="group">
+    <div class="ghead">A4 · 2 道<span class="badge">相似 1.00</span></div>
+    <table><thead><tr><th>选</th><th>中文名</th><th>English</th><th>菜系</th><th>类型</th><th>图片</th><th>主料</th></tr></thead><tbody>
+      <tr><td><input type="radio" name="A4" value="halal-soybean-paste-dumplings"></td>
+        <td class="zh">烧麦</td><td class="muted">Halai Soybean Paste Dumplings</td>
+        <td class="muted">home_style</td><td class="muted">roast</td>
+        <td class="muted">有图 3/3</td><td class="ings">烧麦皮、猪肉馅、生姜、虾仁、香菇</td></tr>
+      <tr><td><input type="radio" name="A4" value="shrimp-siu-mai"></td>
+        <td class="zh">鲜虾烧麦</td><td class="muted">Shrimp Siu Mai</td>
+        <td class="muted">home_style</td><td class="muted">roast</td>
+        <td class="muted">有图 3/3</td><td class="ings">烧麦皮、猪肉馅、生姜、虾仁、香菇</td></tr></tbody></table>
+  </section>
+  <section class="group">
+    <div class="ghead">A5 · 2 道<span class="badge">相似 1.00</span></div>
+    <table><thead><tr><th>选</th><th>中文名</th><th>English</th><th>菜系</th><th>类型</th><th>图片</th><th>主料</th></tr></thead><tbody>
+      <tr><td><input type="radio" name="A5" value="braised-goose"></td>
+        <td class="zh">卤鹅</td><td class="muted">Braised Goose</td>
+        <td class="muted">home_style</td><td class="muted">braise</td>
+        <td class="muted">有图 6/6</td><td class="ings">鹅肉</td></tr>
+      <tr><td><input type="radio" name="A5" value="hakka-braised-goose"></td>
+        <td class="zh">客家卤鹅</td><td class="muted">Hakka-Style Braised Goose</td>
+        <td class="muted">hakka</td><td class="muted">braise</td>
+        <td class="muted">有图 6/6</td><td class="ings">鹅肉</td></tr></tbody></table>
+  </section>
+  <section class="group">
+    <div class="ghead">A6 · 2 道<span class="badge">相似 1.00</span></div>
+    <table><thead><tr><th>选</th><th>中文名</th><th>English</th><th>菜系</th><th>类型</th><th>图片</th><th>主料</th></tr></thead><tbody>
+      <tr><td><input type="radio" name="A6" value="signature-spiced-beef"></td>
+        <td class="zh">秘制酱牛肉</td><td class="muted">Signature Spiced Beef</td>
+        <td class="muted">home_style</td><td class="muted">stir_fry</td>
+        <td class="muted">有图 6/6</td><td class="ings">牛腱子</td></tr>
+      <tr><td><input type="radio" name="A6" value="halal-soy-braised-beef"></td>
+        <td class="zh">清真酱牛肉</td><td class="muted">Halal Soy-Braised Beef</td>
+        <td class="muted">northwestern</td><td class="muted">cold</td>
+        <td class="muted">有图 5/5</td><td class="ings">牛腱子</td></tr></tbody></table>
+  </section>
+  <section class="group">
+    <div class="ghead">A7 · 2 道<span class="badge">相似 0.92</span></div>
+    <table><thead><tr><th>选</th><th>中文名</th><th>English</th><th>菜系</th><th>类型</th><th>图片</th><th>主料</th></tr></thead><tbody>
+      <tr><td><input type="radio" name="A7" value="xinjiang-big-plate-chicken"></td>
+        <td class="zh">大盘鸡</td><td class="muted">Xinjiang Big Plate Chicken</td>
+        <td class="muted">xinjiang</td><td class="muted">stir_fry</td>
+        <td class="muted">有图 4/4</td><td class="ings">土豆、土鸡、洋葱、青椒、面条</td></tr>
+      <tr><td><input type="radio" name="A7" value="halal-big-plate-chicken"></td>
+        <td class="zh">清真大盘鸡</td><td class="muted">Halal-Style Big Plate Chicken</td>
+        <td class="muted">halal</td><td class="muted">braise</td>
+        <td class="muted">无图</td><td class="ings">土豆、土鸡、青椒、面条</td></tr></tbody></table>
+  </section>
+  <section class="group">
+    <div class="ghead">A8 · 2 道<span class="badge">相似 0.90</span></div>
+    <table><thead><tr><th>选</th><th>中文名</th><th>English</th><th>菜系</th><th>类型</th><th>图片</th><th>主料</th></tr></thead><tbody>
+      <tr><td><input type="radio" name="A8" value="family-style-sweet-and-sour-pork-tenderloin"></td>
+        <td class="zh">家传糖醋里脊</td><td class="muted">Family Style Sweet and Sour Pork Tenderloin</td>
+        <td class="muted">home_style</td><td class="muted">stir_fry</td>
+        <td class="muted">有图 6/6</td><td class="ings">猪里脊、生粉、面粉、鸡蛋</td></tr>
+      <tr><td><input type="radio" name="A8" value="sweet-and-sour-pork-tenderloin-2-mp"></td>
+        <td class="zh">糖醋里脊</td><td class="muted">Sweet and Sour Pork Tenderloin</td>
+        <td class="muted">shandong</td><td class="muted">stir_fry</td>
+        <td class="muted">有图 5/5</td><td class="ings">猪里脊、生粉、面粉</td></tr></tbody></table>
+  </section>
+  <section class="group">
+    <div class="ghead">A9 · 2 道<span class="badge">相似 0.90</span></div>
+    <table><thead><tr><th>选</th><th>中文名</th><th>English</th><th>菜系</th><th>类型</th><th>图片</th><th>主料</th></tr></thead><tbody>
+      <tr><td><input type="radio" name="A9" value="yangzhou-scalded-tofu-shreds"></td>
+        <td class="zh">扬州烫干丝</td><td class="muted">Yangzhou Scalded Tofu Shreds</td>
+        <td class="muted">jiangsu</td><td class="muted">cold</td>
+        <td class="muted">有图 5/5</td><td class="ings">姜丝、白豆腐干、虾米、香菜</td></tr>
+      <tr><td><input type="radio" name="A9" value="yangzhou-shredded-tofu"></td>
+        <td class="zh">烫干丝</td><td class="muted">Yangzhou Shredded Tofu</td>
+        <td class="muted">jiangsu</td><td class="muted">cold</td>
+        <td class="muted"><span class="warn">图 2/3</span></td><td class="ings">姜丝、白豆腐干、虾米</td></tr></tbody></table>
+  </section>
+  <section class="group">
+    <div class="ghead">A10 · 3 道<span class="badge">相似 0.87</span></div>
+    <table><thead><tr><th>选</th><th>中文名</th><th>English</th><th>菜系</th><th>类型</th><th>图片</th><th>主料</th></tr></thead><tbody>
+      <tr><td><input type="radio" name="A10" value="home-style-small-wontons"></td>
+        <td class="zh">家常小馄饨</td><td class="muted">Home-Style Small Wontons</td>
+        <td class="muted">home_style</td><td class="muted">boil</td>
+        <td class="muted">有图 5/5</td><td class="ings">猪肉馅、生姜、虾仁、馄饨皮、香葱</td></tr>
+      <tr><td><input type="radio" name="A10" value="huizhou-mini-wontons"></td>
+        <td class="zh">徽州小馄饨</td><td class="muted">Huizhou Mini Wontons</td>
+        <td class="muted">anhui</td><td class="muted">boil</td>
+        <td class="muted">有图 5/5</td><td class="ings">猪肉馅、紫菜、葱花、蛋皮、馄饨皮</td></tr>
+      <tr><td><input type="radio" name="A10" value="soup-wontons"></td>
+        <td class="zh">馄饨</td><td class="muted">Soup Wontons</td>
+        <td class="muted">home_style</td><td class="muted">boil</td>
+        <td class="muted">有图 4/4</td><td class="ings">猪肉馅、荠菜、虾仁、馄饨皮、香葱</td></tr></tbody></table>
+  </section>
+  <section class="group">
+    <div class="ghead">A11 · 2 道<span class="badge">相似 0.87</span></div>
+    <table><thead><tr><th>选</th><th>中文名</th><th>English</th><th>菜系</th><th>类型</th><th>图片</th><th>主料</th></tr></thead><tbody>
+      <tr><td><input type="radio" name="A11" value="sichuan-boiled-beef"></td>
+        <td class="zh">水煮牛肉</td><td class="muted">Sichuan Boiled Beef in Chili Oil</td>
+        <td class="muted">sichuan</td><td class="muted">boil</td>
+        <td class="muted"><span class="warn">图 5/6</span></td><td class="ings">牛里脊、生菜、豆芽</td></tr>
+      <tr><td><input type="radio" name="A11" value="private-house-style-boiled-beef"></td>
+        <td class="zh">私房水煮牛肉</td><td class="muted">Private House Style Boiled Beef</td>
+        <td class="muted">home_style</td><td class="muted">boil</td>
+        <td class="muted">有图 5/5</td><td class="ings">牛里脊、豆芽</td></tr></tbody></table>
+  </section>
+  <section class="group">
+    <div class="ghead">A12 · 2 道<span class="badge">相似 0.84</span></div>
+    <table><thead><tr><th>选</th><th>中文名</th><th>English</th><th>菜系</th><th>类型</th><th>图片</th><th>主料</th></tr></thead><tbody>
+      <tr><td><input type="radio" name="A12" value="zucchini-egg-pancake"></td>
+        <td class="zh">西葫芦鸡蛋饼</td><td class="muted">Zucchini and Egg Pancake</td>
+        <td class="muted">home_style</td><td class="muted">pan_fry</td>
+        <td class="muted">有图 4/4</td><td class="ings">小葱、西葫芦、面粉、鸡蛋</td></tr>
+      <tr><td><input type="radio" name="A12" value="pan-fried-egg-crepe"></td>
+        <td class="zh">鸡蛋饼</td><td class="muted">Pan-Fried Egg Crepe</td>
+        <td class="muted">home_style</td><td class="muted">pan_fry</td>
+        <td class="muted">有图 3/3</td><td class="ings">小葱、清水、面粉、鸡蛋</td></tr></tbody></table>
+  </section>
+  <section class="group">
+    <div class="ghead">A13 · 2 道<span class="badge">相似 0.84</span></div>
+    <table><thead><tr><th>选</th><th>中文名</th><th>English</th><th>菜系</th><th>类型</th><th>图片</th><th>主料</th></tr></thead><tbody>
+      <tr><td><input type="radio" name="A13" value="ningbo-tangyuan-sweet-rice-balls"></td>
+        <td class="zh">宁波汤圆</td><td class="muted">Ningbo Tangyuan (Sweet Rice Balls)</td>
+        <td class="muted">zhejiang</td><td class="muted">dessert</td>
+        <td class="muted">有图 5/5</td><td class="ings">温水、猪油、糯米粉、黑芝麻</td></tr>
+      <tr><td><input type="radio" name="A13" value="peanut-tangyuan"></td>
+        <td class="zh">汤圆(花生)</td><td class="muted">Peanut Tangyuan</td>
+        <td class="muted">home_style</td><td class="muted">soup</td>
+        <td class="muted">无图</td><td class="ings">温水、猪油、糯米粉、花生</td></tr></tbody></table>
+  </section>
+  <section class="group">
+    <div class="ghead">A14 · 2 道<span class="badge">相似 0.80</span></div>
+    <table><thead><tr><th>选</th><th>中文名</th><th>English</th><th>菜系</th><th>类型</th><th>图片</th><th>主料</th></tr></thead><tbody>
+      <tr><td><input type="radio" name="A14" value="hakka-ginger-pork-trotters"></td>
+        <td class="zh">客家猪脚姜</td><td class="muted">Hakka Ginger Pork Trotters</td>
+        <td class="muted">hakka</td><td class="muted">braise</td>
+        <td class="muted">有图 5/5</td><td class="ings">猪蹄、生姜、鸡蛋</td></tr>
+      <tr><td><input type="radio" name="A14" value="cantonese-braised-pig-trotters-in-ginger-vinegar"></td>
+        <td class="zh">猪脚姜</td><td class="muted">Cantonese Braised Pig Trotters in Ginger Vinegar</td>
+        <td class="muted">cantonese</td><td class="muted">soup</td>
+        <td class="muted">有图 4/4</td><td class="ings">姜、猪蹄、鸡蛋</td></tr></tbody></table>
+  </section>
+  <section class="group">
+    <div class="ghead">A15 · 2 道<span class="badge">相似 0.80</span></div>
+    <table><thead><tr><th>选</th><th>中文名</th><th>English</th><th>菜系</th><th>类型</th><th>图片</th><th>主料</th></tr></thead><tbody>
+      <tr><td><input type="radio" name="A15" value="beijing-halal-braised-lamb"></td>
+        <td class="zh">烧羊肉</td><td class="muted">Beijing Halal Braised Lamb</td>
+        <td class="muted">northern</td><td class="muted">roast</td>
+        <td class="muted">有图 7/7</td><td class="ings">大葱、姜、羊肉</td></tr>
+      <tr><td><input type="radio" name="A15" value="halal-bai-kui-braised-mutton"></td>
+        <td class="zh">白魁烧羊肉</td><td class="muted">Halal Bai Kui Braised Mutton</td>
+        <td class="muted">halal</td><td class="muted">roast</td>
+        <td class="muted"><span class="warn">图 5/6</span></td><td class="ings">大葱、生姜、羊肉</td></tr></tbody></table>
+  </section>
+  <section class="group">
+    <div class="ghead">A16 · 2 道<span class="badge">相似 0.80</span></div>
+    <table><thead><tr><th>选</th><th>中文名</th><th>English</th><th>菜系</th><th>类型</th><th>图片</th><th>主料</th></tr></thead><tbody>
+      <tr><td><input type="radio" name="A16" value="foil-grilled-enoki-mushrooms"></td>
+        <td class="zh">锡纸烤金针菇</td><td class="muted">Foil-Grilled Enoki Mushrooms</td>
+        <td class="muted">home_style</td><td class="muted">roast</td>
+        <td class="muted">有图 6/6</td><td class="ings">小米辣、蒜蓉、金针菇</td></tr>
+      <tr><td><input type="radio" name="A16" value="enoki-mushrooms"></td>
+        <td class="zh">金针菇</td><td class="muted">Enoki Mushrooms</td>
+        <td class="muted">home_style</td><td class="muted">stir_fry</td>
+        <td class="muted">有图 5/5</td><td class="ings">大蒜、小米辣、金针菇</td></tr></tbody></table>
+  </section>
+  <section class="group">
+    <div class="ghead">A17 · 2 道<span class="badge">相似 0.80</span></div>
+    <table><thead><tr><th>选</th><th>中文名</th><th>English</th><th>菜系</th><th>类型</th><th>图片</th><th>主料</th></tr></thead><tbody>
+      <tr><td><input type="radio" name="A17" value="northeast-sichuan-spicy-jelly"></td>
+        <td class="zh">川北凉粉</td><td class="muted">Northeast Sichuan Spicy Jelly</td>
+        <td class="muted">sichuan</td><td class="muted">cold</td>
+        <td class="muted">有图 6/6</td><td class="ings">蒜、豌豆淀粉</td></tr>
+      <tr><td><input type="radio" name="A17" value="cantonese-mung-bean-jelly"></td>
+        <td class="zh">凉粉</td><td class="muted">Cantonese Sweet Mung Bean Jelly</td>
+        <td class="muted">cantonese</td><td class="muted">cold</td>
+        <td class="muted">有图 5/5</td><td class="ings">清水、蒜、豌豆淀粉、黄瓜</td></tr></tbody></table>
+  </section>
+  <section class="group">
+    <div class="ghead">A18 · 2 道<span class="badge">相似 0.80</span></div>
+    <table><thead><tr><th>选</th><th>中文名</th><th>English</th><th>菜系</th><th>类型</th><th>图片</th><th>主料</th></tr></thead><tbody>
+      <tr><td><input type="radio" name="A18" value="spicy-braised-duck-necks"></td>
+        <td class="zh">鸭脖</td><td class="muted">Spicy Braised Duck Necks</td>
+        <td class="muted">hubei</td><td class="muted">stir_fry</td>
+        <td class="muted">有图 5/5</td><td class="ings">干、鸭脖</td></tr>
+      <tr><td><input type="radio" name="A18" value="jingwu-spicy-duck-necks"></td>
+        <td class="zh">精武鸭脖</td><td class="muted">Jingwu Spicy Duck Necks</td>
+        <td class="muted">hubei</td><td class="muted">stir_fry</td>
+        <td class="muted">有图 5/5</td><td class="ings">鸭脖</td></tr></tbody></table>
+  </section>
+  <section class="group">
+    <div class="ghead">A19 · 2 道<span class="badge">相似 0.80</span></div>
+    <table><thead><tr><th>选</th><th>中文名</th><th>English</th><th>菜系</th><th>类型</th><th>图片</th><th>主料</th></tr></thead><tbody>
+      <tr><td><input type="radio" name="A19" value="steamed-pork-rice-flour-alt"></td>
+        <td class="zh">粉蒸肉</td><td class="muted">Steamed Pork with Rice Flour</td>
+        <td class="muted">sichuan</td><td class="muted">steam</td>
+        <td class="muted">有图 6/6</td><td class="ings">猪五花肉、红薯、蒸肉米粉</td></tr>
+      <tr><td><input type="radio" name="A19" value="hubei-steamed-pork-rice-flour"></td>
+        <td class="zh">湖北粉蒸肉</td><td class="muted">Hubei Steamed Pork with Rice Flour</td>
+        <td class="muted">hubei</td><td class="muted">steam</td>
+        <td class="muted">有图 3/3</td><td class="ings">猪五花肉、红苕、蒸肉米粉</td></tr></tbody></table>
+  </section>
+  <section class="group">
+    <div class="ghead">A20 · 2 道<span class="badge">相似 0.80</span></div>
+    <table><thead><tr><th>选</th><th>中文名</th><th>English</th><th>菜系</th><th>类型</th><th>图片</th><th>主料</th></tr></thead><tbody>
+      <tr><td><input type="radio" name="A20" value="scallion-flower-roll"></td>
+        <td class="zh">花卷</td><td class="muted">Scallion Flower Roll</td>
+        <td class="muted">home_style</td><td class="muted">staple</td>
+        <td class="muted">有图 7/7</td><td class="ings">酵母、面粉、香葱</td></tr>
+      <tr><td><input type="radio" name="A20" value="sesame-scallion-roll"></td>
+        <td class="zh">芝麻花卷</td><td class="muted">Sesame Scallion Roll</td>
+        <td class="muted">home_style</td><td class="muted">staple</td>
+        <td class="muted">有图 6/6</td><td class="ings">白芝麻、酵母、面粉</td></tr></tbody></table>
+  </section>
+  <section class="group">
+    <div class="ghead">A21 · 3 道<span class="badge">相似 0.77</span></div>
+    <table><thead><tr><th>选</th><th>中文名</th><th>English</th><th>菜系</th><th>类型</th><th>图片</th><th>主料</th></tr></thead><tbody>
+      <tr><td><input type="radio" name="A21" value="suan-cai-yu"></td>
+        <td class="zh">酸菜鱼</td><td class="muted">Suan Cai Yu (Pickled Cabbage Fish)</td>
+        <td class="muted">home_style</td><td class="muted">boil</td>
+        <td class="muted">有图 6/6</td><td class="ings">主食、炒料、腌料、葱姜蒜酸菜、装饰、酸菜、黑鱼片</td></tr>
+      <tr><td><input type="radio" name="A21" value="house-style-pickled-cabbage-fish"></td>
+        <td class="zh">私家酸菜鱼</td><td class="muted">House-Style Pickled Cabbage Fish</td>
+        <td class="muted">home_style</td><td class="muted">stir_fry</td>
+        <td class="muted">有图 5/5</td><td class="ings">大蒜、泡椒、生姜、老坛酸菜、黑鱼</td></tr>
+      <tr><td><input type="radio" name="A21" value="private-house-style-pickled-cabbage-fish"></td>
+        <td class="zh">私房酸菜鱼</td><td class="muted">Private House Style Pickled Cabbage Fish</td>
+        <td class="muted">home_style</td><td class="muted">stir_fry</td>
+        <td class="muted">有图 4/4</td><td class="ings">大蒜、泡椒、生姜、草鱼、酸菜</td></tr></tbody></table>
+  </section>
+  <section class="group">
+    <div class="ghead">A22 · 3 道<span class="badge">相似 0.77</span></div>
+    <table><thead><tr><th>选</th><th>中文名</th><th>English</th><th>菜系</th><th>类型</th><th>图片</th><th>主料</th></tr></thead><tbody>
+      <tr><td><input type="radio" name="A22" value="cheung-fun"></td>
+        <td class="zh">肠粉</td><td class="muted">Cheung Fun</td>
+        <td class="muted">cantonese</td><td class="muted">steam</td>
+        <td class="muted">有图 11/11</td><td class="ings">水、澄粉、玉米淀粉、粘米粉、腊肠</td></tr>
+      <tr><td><input type="radio" name="A22" value="cantonese-beef-rice-rolls"></td>
+        <td class="zh">牛肉肠粉</td><td class="muted">Cantonese Beef Rice Rolls</td>
+        <td class="muted">home_style</td><td class="muted">staple</td>
+        <td class="muted">有图 6/6</td><td class="ings">清水、澄粉、牛肉、玉米淀粉、粘米粉</td></tr>
+      <tr><td><input type="radio" name="A22" value="char-siu-rice-rolls"></td>
+        <td class="zh">肠粉（叉烧）</td><td class="muted">Char Siu Char Siu Rice Rolls</td>
+        <td class="muted">home_style</td><td class="muted">roast</td>
+        <td class="muted">有图 5/5</td><td class="ings">叉烧肉、澄面、玉米淀粉、粘米粉、鸡蛋</td></tr></tbody></table>
+  </section>
+  <section class="group">
+    <div class="ghead">A23 · 2 道<span class="badge">相似 0.77</span></div>
+    <table><thead><tr><th>选</th><th>中文名</th><th>English</th><th>菜系</th><th>类型</th><th>图片</th><th>主料</th></tr></thead><tbody>
+      <tr><td><input type="radio" name="A23" value="northwest-braised-lamb"></td>
+        <td class="zh">西北黄焖羊肉</td><td class="muted">Northwest Braised Lamb with Potatoes</td>
+        <td class="muted">northwestern</td><td class="muted">braise</td>
+        <td class="muted">有图 5/5</td><td class="ings">土豆、姜、小葱、羊肉、胡萝卜</td></tr>
+      <tr><td><input type="radio" name="A23" value="northwestern-yellow-braised-lamb"></td>
+        <td class="zh">黄焖羊肉</td><td class="muted">Northwestern Yellow Braised Lamb</td>
+        <td class="muted">northwestern</td><td class="muted">braise</td>
+        <td class="muted">有图 4/4</td><td class="ings">土豆、姜、洋葱、羊腿肉、胡萝卜</td></tr></tbody></table>
+  </section>
+  <section class="group">
+    <div class="ghead">A24 · 2 道<span class="badge">相似 0.77</span></div>
+    <table><thead><tr><th>选</th><th>中文名</th><th>English</th><th>菜系</th><th>类型</th><th>图片</th><th>主料</th></tr></thead><tbody>
+      <tr><td><input type="radio" name="A24" value="home-style-mixed-vegetable-stir-fry"></td>
+        <td class="zh">家常炒合菜</td><td class="muted">Home-Style Mixed Vegetable Stir-Fry</td>
+        <td class="muted">home_style</td><td class="muted">stir_fry</td>
+        <td class="muted"><span class="warn">图 5/6</span></td><td class="ings">粉丝、绿豆芽、菠菜、韭黄、鸡蛋</td></tr>
+      <tr><td><input type="radio" name="A24" value="beijing-mixed-stir-fry"></td>
+        <td class="zh">京味儿炒合菜</td><td class="muted">Beijing Mixed Stir-Fry</td>
+        <td class="muted">northern</td><td class="muted">stir_fry</td>
+        <td class="muted">有图 5/5</td><td class="ings">大葱、粉丝、绿豆芽、韭菜、鸡蛋</td></tr></tbody></table>
+  </section>
+  <section class="group">
+    <div class="ghead">A25 · 2 道<span class="badge">相似 0.77</span></div>
+    <table><thead><tr><th>选</th><th>中文名</th><th>English</th><th>菜系</th><th>类型</th><th>图片</th><th>主料</th></tr></thead><tbody>
+      <tr><td><input type="radio" name="A25" value="stir-fried-pork-carrots"></td>
+        <td class="zh">胡萝卜炒肉</td><td class="muted">Stir-Fried Pork with Carrots</td>
+        <td class="muted">home_style</td><td class="muted">stir_fry</td>
+        <td class="muted">有图 6/6</td><td class="ings">小葱、猪里脊、胡萝卜、蒜、青椒</td></tr>
+      <tr><td><input type="radio" name="A25" value="stir-fried-pork-with-corn-and-carrots"></td>
+        <td class="zh">玉米胡萝卜炒肉丁</td><td class="muted">Stir-Fried Pork with Corn and Carrots</td>
+        <td class="muted">home_style</td><td class="muted">stir_fry</td>
+        <td class="muted">有图 3/3</td><td class="ings">小葱、猪肉末、玉米粒、胡萝卜、蒜</td></tr></tbody></table>
+  </section>
+  <section class="group">
+    <div class="ghead">A26 · 2 道<span class="badge">相似 0.77</span></div>
+    <table><thead><tr><th>选</th><th>中文名</th><th>English</th><th>菜系</th><th>类型</th><th>图片</th><th>主料</th></tr></thead><tbody>
+      <tr><td><input type="radio" name="A26" value="stir-fried-smoked-tofu-celery"></td>
+        <td class="zh">香干炒芹菜</td><td class="muted">Stir-Fried Smoked Tofu with Celery</td>
+        <td class="muted">hunan</td><td class="muted">stir_fry</td>
+        <td class="muted">有图 2/2</td><td class="ings">芹菜、蒜、香干</td></tr>
+      <tr><td><input type="radio" name="A26" value="stir-fried-celery-smoked-tofu"></td>
+        <td class="zh">芹菜炒香干</td><td class="muted">Stir-Fried Celery &amp; Smoked Tofu</td>
+        <td class="muted">zhejiang</td><td class="muted">stir_fry</td>
+        <td class="muted">无图</td><td class="ings">大蒜、芹菜、香干</td></tr></tbody></table>
+  </section>
+  <section class="group">
+    <div class="ghead">A27 · 2 道<span class="badge">相似 0.76</span></div>
+    <table><thead><tr><th>选</th><th>中文名</th><th>English</th><th>菜系</th><th>类型</th><th>图片</th><th>主料</th></tr></thead><tbody>
+      <tr><td><input type="radio" name="A27" value="xinjiang-thin-skin-mantou"></td>
+        <td class="zh">薄皮包子</td><td class="muted">Xinjiang Thin-Skin Mantou</td>
+        <td class="muted">home_style</td><td class="muted">steam</td>
+        <td class="muted">有图 5/5</td><td class="ings">洋葱、羊尾油、羊肉馅、饺子皮</td></tr>
+      <tr><td><input type="radio" name="A27" value="xinjiang-thin-crust-lamb-dumplings"></td>
+        <td class="zh">新疆薄皮包子</td><td class="muted">Xinjiang Thin-Crust Lamb Dumplings</td>
+        <td class="muted">xinjiang</td><td class="muted">steam</td>
+        <td class="muted"><span class="warn">图 4/6</span></td><td class="ings">洋葱、羊肉馅、面粉</td></tr></tbody></table>
+  </section>
+  <section class="group">
+    <div class="ghead">A28 · 2 道<span class="badge">相似 0.76</span></div>
+    <table><thead><tr><th>选</th><th>中文名</th><th>English</th><th>菜系</th><th>类型</th><th>图片</th><th>主料</th></tr></thead><tbody>
+      <tr><td><input type="radio" name="A28" value="spicy-stir-fried-pork-intestines"></td>
+        <td class="zh">火爆肥肠</td><td class="muted">Spicy Stir-Fried Pork Intestines</td>
+        <td class="muted">sichuan</td><td class="muted">stir_fry</td>
+        <td class="muted">有图 6/6</td><td class="ings">猪大肠、青椒</td></tr>
+      <tr><td><input type="radio" name="A28" value="sichuan-spiced-pork-intestines"></td>
+        <td class="zh">肥肠</td><td class="muted">Sichuan Spiced Pork Intestines</td>
+        <td class="muted">home_style</td><td class="muted">stir_fry</td>
+        <td class="muted"><span class="warn">图 3/4</span></td><td class="ings">大葱、姜、猪大肠、红椒、青椒</td></tr></tbody></table>
+  </section>
+  <section class="group">
+    <div class="ghead">A29 · 2 道<span class="badge">相似 0.76</span></div>
+    <table><thead><tr><th>选</th><th>中文名</th><th>English</th><th>菜系</th><th>类型</th><th>图片</th><th>主料</th></tr></thead><tbody>
+      <tr><td><input type="radio" name="A29" value="steamed-chicken-breast"></td>
+        <td class="zh">清蒸鸡胸肉</td><td class="muted">Steamed Chicken Breast</td>
+        <td class="muted">home_style</td><td class="muted">steam</td>
+        <td class="muted">有图 6/6</td><td class="ings">小葱、生姜、鸡胸肉</td></tr>
+      <tr><td><input type="radio" name="A29" value="private-house-style-steamed-chicken"></td>
+        <td class="zh">私房蒸鸡</td><td class="muted">Private House Style Steamed Chicken</td>
+        <td class="muted">home_style</td><td class="muted">steam</td>
+        <td class="muted"><span class="warn">图 3/6</span></td><td class="ings">三黄鸡、大蒜、小葱、生姜</td></tr></tbody></table>
+  </section>
+  <section class="group">
+    <div class="ghead">A30 · 2 道<span class="badge">相似 0.76</span></div>
+    <table><thead><tr><th>选</th><th>中文名</th><th>English</th><th>菜系</th><th>类型</th><th>图片</th><th>主料</th></tr></thead><tbody>
+      <tr><td><input type="radio" name="A30" value="kaili-sour-soup-fish"></td>
+        <td class="zh">凯里酸汤鱼</td><td class="muted">Kaili Sour Soup Fish</td>
+        <td class="muted">yunnan</td><td class="muted">soup</td>
+        <td class="muted">有图 7/7</td><td class="ings">番茄、糟辣椒、鲶鱼</td></tr>
+      <tr><td><input type="radio" name="A30" value="guizhou-sour-soup-fish"></td>
+        <td class="zh">酸汤鱼</td><td class="muted">Guizhou Sour Soup Fish</td>
+        <td class="muted">yunnan</td><td class="muted">soup</td>
+        <td class="muted">有图 6/6</td><td class="ings">姜、番茄、糟辣椒、草鱼</td></tr></tbody></table>
+  </section>
+  <section class="group">
+    <div class="ghead">A31 · 2 道<span class="badge">相似 0.76</span></div>
+    <table><thead><tr><th>选</th><th>中文名</th><th>English</th><th>菜系</th><th>类型</th><th>图片</th><th>主料</th></tr></thead><tbody>
+      <tr><td><input type="radio" name="A31" value="guokui-flatbread"></td>
+        <td class="zh">锅盔</td><td class="muted">Guokui Flatbread</td>
+        <td class="muted">northwestern</td><td class="muted">staple</td>
+        <td class="muted">有图 6/6</td><td class="ings">白芝麻、酵母、面粉</td></tr>
+      <tr><td><input type="radio" name="A31" value="gongan-mei-gan-cake-biscuit"></td>
+        <td class="zh">公安锅盔</td><td class="muted">Gong&#x27;an Mei Gan Cake Biscuit</td>
+        <td class="muted">hubei</td><td class="muted">staple</td>
+        <td class="muted"><span class="warn">图 3/5</span></td><td class="ings">梅干菜、猪肉末、酵母、面粉</td></tr></tbody></table>
+  </section>
+  <section class="group">
+    <div class="ghead">A32 · 2 道<span class="badge">相似 0.76</span></div>
+    <table><thead><tr><th>选</th><th>中文名</th><th>English</th><th>菜系</th><th>类型</th><th>图片</th><th>主料</th></tr></thead><tbody>
+      <tr><td><input type="radio" name="A32" value="lamb-broth"></td>
+        <td class="zh">羊肉汤</td><td class="muted">Lamb Broth</td>
+        <td class="muted">home_style</td><td class="muted">soup</td>
+        <td class="muted">有图 6/6</td><td class="ings">生姜、羊肉、羊骨</td></tr>
+      <tr><td><input type="radio" name="A32" value="danchen-mutton-soup"></td>
+        <td class="zh">单县羊肉汤</td><td class="muted">Danchen Mutton Soup</td>
+        <td class="muted">shandong</td><td class="muted">soup</td>
+        <td class="muted">有图 6/6</td><td class="ings">生姜、羊腿肉、羊骨、苹果</td></tr></tbody></table>
+  </section>
+  <section class="group">
+    <div class="ghead">A33 · 3 道<span class="badge">相似 0.73</span></div>
+    <table><thead><tr><th>选</th><th>中文名</th><th>English</th><th>菜系</th><th>类型</th><th>图片</th><th>主料</th></tr></thead><tbody>
+      <tr><td><input type="radio" name="A33" value="traditional-sweet-sour-pork-ribs"></td>
+        <td class="zh">古法糖醋排骨</td><td class="muted">Traditional Sweet and Sour Pork Ribs</td>
+        <td class="muted">home_style</td><td class="muted">stir_fry</td>
+        <td class="muted">有图 8/8</td><td class="ings">大葱、猪肋排、生姜</td></tr>
+      <tr><td><input type="radio" name="A33" value="sweet-and-sour-spare-ribs-mp"></td>
+        <td class="zh">糖醋排骨</td><td class="muted">Sweet &amp; Sour Spare Ribs</td>
+        <td class="muted">zhejiang</td><td class="muted">stir_fry</td>
+        <td class="muted">有图 7/7</td><td class="ings">猪肋排</td></tr>
+      <tr><td><input type="radio" name="A33" value="private-house-style-sweet-sour-pork-ribs"></td>
+        <td class="zh">私房糖醋排骨</td><td class="muted">Private House Style Sweet and Sour Pork Ribs</td>
+        <td class="muted">home_style</td><td class="muted">stir_fry</td>
+        <td class="muted">有图 5/5</td><td class="ings">猪小排</td></tr></tbody></table>
+  </section>
+  <section class="group">
+    <div class="ghead">A34 · 2 道<span class="badge">相似 0.73</span></div>
+    <table><thead><tr><th>选</th><th>中文名</th><th>English</th><th>菜系</th><th>类型</th><th>图片</th><th>主料</th></tr></thead><tbody>
+      <tr><td><input type="radio" name="A34" value="halal-lamb-skewers"></td>
+        <td class="zh">清真羊肉串</td><td class="muted">Halal Lamb Skewers</td>
+        <td class="muted">halal</td><td class="muted">skewer</td>
+        <td class="muted">有图 6/6</td><td class="ings">羊肥肉、羊腿肉</td></tr>
+      <tr><td><input type="radio" name="A34" value="xinjiang-lamb-skewers"></td>
+        <td class="zh">羊肉串</td><td class="muted">Xinjiang Lamb Skewers</td>
+        <td class="muted">northern</td><td class="muted">skewer</td>
+        <td class="muted">有图 5/5</td><td class="ings">洋葱~、羊腿肉</td></tr></tbody></table>
+  </section>
+  <section class="group">
+    <div class="ghead">A35 · 2 道<span class="badge">相似 0.73</span></div>
+    <table><thead><tr><th>选</th><th>中文名</th><th>English</th><th>菜系</th><th>类型</th><th>图片</th><th>主料</th></tr></thead><tbody>
+      <tr><td><input type="radio" name="A35" value="peking-roast-duck-crispy-skin-slices"></td>
+        <td class="zh">北京烤鸭片皮鸭</td><td class="muted">Peking Roast Duck with Crispy Skin Slices</td>
+        <td class="muted">northern</td><td class="muted">roast</td>
+        <td class="muted">有图 5/5</td><td class="ings">填鸭、生姜</td></tr>
+      <tr><td><input type="radio" name="A35" value="peking-roast-duck"></td>
+        <td class="zh">北京烤鸭</td><td class="muted">Peking Roast Duck</td>
+        <td class="muted">northern</td><td class="muted">roast</td>
+        <td class="muted">有图 4/4</td><td class="ings">填鸭、小葱</td></tr></tbody></table>
+  </section>
+  <section class="group">
+    <div class="ghead">A36 · 2 道<span class="badge">相似 0.73</span></div>
+    <table><thead><tr><th>选</th><th>中文名</th><th>English</th><th>菜系</th><th>类型</th><th>图片</th><th>主料</th></tr></thead><tbody>
+      <tr><td><input type="radio" name="A36" value="beijing-gravy-noodles"></td>
+        <td class="zh">打卤面</td><td class="muted">Beijing Gravy Noodles</td>
+        <td class="muted">northern</td><td class="muted">noodle</td>
+        <td class="muted">有图 6/6</td><td class="ings">木耳、猪五花肉、面条、香菇</td></tr>
+      <tr><td><input type="radio" name="A36" value="tomato-gravy-noodles"></td>
+        <td class="zh">西红柿打卤面</td><td class="muted">Tomato Gravy Noodles</td>
+        <td class="muted">northern</td><td class="muted">noodle</td>
+        <td class="muted">有图 3/3</td><td class="ings">木耳、西红柿、面条、鸡蛋</td></tr></tbody></table>
+  </section>
+  <section class="group">
+    <div class="ghead">A37 · 2 道<span class="badge">相似 0.73</span></div>
+    <table><thead><tr><th>选</th><th>中文名</th><th>English</th><th>菜系</th><th>类型</th><th>图片</th><th>主料</th></tr></thead><tbody>
+      <tr><td><input type="radio" name="A37" value="chinese-steamed-egg-custard"></td>
+        <td class="zh">蒸蛋</td><td class="muted">Chinese Steamed Egg Custard</td>
+        <td class="muted">home_style</td><td class="muted">steam</td>
+        <td class="muted">有图 4/4</td><td class="ings">温开水、鸡蛋</td></tr>
+      <tr><td><input type="radio" name="A37" value="microwave-steamed-egg"></td>
+        <td class="zh">微波炉蒸蛋</td><td class="muted">Microwave Steamed Egg</td>
+        <td class="muted">home_style</td><td class="muted">steam</td>
+        <td class="muted">有图 4/4</td><td class="ings">温水、鸡蛋</td></tr></tbody></table>
+  </section>
+  <section class="group">
+    <div class="ghead">A38 · 2 道<span class="badge">相似 0.73</span></div>
+    <table><thead><tr><th>选</th><th>中文名</th><th>English</th><th>菜系</th><th>类型</th><th>图片</th><th>主料</th></tr></thead><tbody>
+      <tr><td><input type="radio" name="A38" value="private-house-style-tofu"></td>
+        <td class="zh">私房豆腐</td><td class="muted">Private House Style Tofu</td>
+        <td class="muted">home_style</td><td class="muted">stir_fry</td>
+        <td class="muted">有图 5/5</td><td class="ings">大蒜、干香菇、老豆腐、青椒</td></tr>
+      <tr><td><input type="radio" name="A38" value="home-style-mapo-tofu"></td>
+        <td class="zh">家常豆腐</td><td class="muted">Home-Style Mapo Tofu</td>
+        <td class="muted">sichuan</td><td class="muted">stir_fry</td>
+        <td class="muted">有图 4/4</td><td class="ings">北豆腐、大蒜、猪五花肉、青椒</td></tr></tbody></table>
+  </section>
+  <section class="group">
+    <div class="ghead">A39 · 2 道<span class="badge">相似 0.73</span></div>
+    <table><thead><tr><th>选</th><th>中文名</th><th>English</th><th>菜系</th><th>类型</th><th>图片</th><th>主料</th></tr></thead><tbody>
+      <tr><td><input type="radio" name="A39" value="pan-fried-buns"></td>
+        <td class="zh">生煎</td><td class="muted">Sheng Jian Bao (Pan-Fried Pork Buns)</td>
+        <td class="muted">shanghainese</td><td class="muted">pan_fry</td>
+        <td class="muted">有图 4/4</td><td class="ings">姜、猪肉末、面粉</td></tr>
+      <tr><td><input type="radio" name="A39" value="shanghai-pan-fried-buns"></td>
+        <td class="zh">上海生煎</td><td class="muted">Shanghai Pan-Fried Buns</td>
+        <td class="muted">home_style</td><td class="muted">pan_fry</td>
+        <td class="muted">有图 4/4</td><td class="ings">大葱、猪皮冻、猪肉末、酵母、面粉</td></tr></tbody></table>
+  </section>
+  <section class="group">
+    <div class="ghead">A40 · 2 道<span class="badge">相似 0.73</span></div>
+    <table><thead><tr><th>选</th><th>中文名</th><th>English</th><th>菜系</th><th>类型</th><th>图片</th><th>主料</th></tr></thead><tbody>
+      <tr><td><input type="radio" name="A40" value="spicy-chicken"></td>
+        <td class="zh">辣子鸡</td><td class="muted">Chongqing Chili Chicken (La Zi Ji)</td>
+        <td class="muted">sichuan</td><td class="muted">stir_fry</td>
+        <td class="muted">有图 4/4</td><td class="ings">姜、鸡腿</td></tr>
+      <tr><td><input type="radio" name="A40" value="guizhou-spicy-chili-chicken"></td>
+        <td class="zh">贵州辣子鸡</td><td class="muted">Guizhou Spicy Chili Chicken</td>
+        <td class="muted">yunnan</td><td class="muted">stir_fry</td>
+        <td class="muted">有图 4/4</td><td class="ings">姜、鸡腿肉</td></tr></tbody></table>
+  </section>
+  <section class="group">
+    <div class="ghead">A41 · 2 道<span class="badge">相似 0.73</span></div>
+    <table><thead><tr><th>选</th><th>中文名</th><th>English</th><th>菜系</th><th>类型</th><th>图片</th><th>主料</th></tr></thead><tbody>
+      <tr><td><input type="radio" name="A41" value="old-jinan-braised-pork-strips"></td>
+        <td class="zh">老济南把子肉</td><td class="muted">Old Jinan Braised Pork Strips</td>
+        <td class="muted">shandong</td><td class="muted">stir_fry</td>
+        <td class="muted">有图 6/6</td><td class="ings">姜、猪五花肉、蒜</td></tr>
+      <tr><td><input type="radio" name="A41" value="bazi-braised-pork"></td>
+        <td class="zh">把子肉</td><td class="muted">Bazi Braised Pork</td>
+        <td class="muted">shandong</td><td class="muted">stir_fry</td>
+        <td class="muted">有图 5/5</td><td class="ings">猪五花肉</td></tr></tbody></table>
+  </section>
+  <section class="group">
+    <div class="ghead">A42 · 2 道<span class="badge">相似 0.73</span></div>
+    <table><thead><tr><th>选</th><th>中文名</th><th>English</th><th>菜系</th><th>类型</th><th>图片</th><th>主料</th></tr></thead><tbody>
+      <tr><td><input type="radio" name="A42" value="spicy-taro-root-potato-fries"></td>
+        <td class="zh">狼牙土豆</td><td class="muted">Spicy Taro Root Potato Fries</td>
+        <td class="muted">sichuan</td><td class="muted">stir_fry</td>
+        <td class="muted">有图 5/5</td><td class="ings">土豆、大蒜</td></tr>
+      <tr><td><input type="radio" name="A42" value="spicy-carved-potato-flowers"></td>
+        <td class="zh">狼牙土豆花</td><td class="muted">Spicy Carved Potato Flowers</td>
+        <td class="muted">sichuan</td><td class="muted">dessert</td>
+        <td class="muted">有图 5/5</td><td class="ings">土豆、香菜</td></tr></tbody></table>
+  </section>
+  <section class="group">
+    <div class="ghead">A43 · 2 道<span class="badge">相似 0.70</span></div>
+    <table><thead><tr><th>选</th><th>中文名</th><th>English</th><th>菜系</th><th>类型</th><th>图片</th><th>主料</th></tr></thead><tbody>
+      <tr><td><input type="radio" name="A43" value="dry-fried-green-beans-mp"></td>
+        <td class="zh">干煸四季豆</td><td class="muted">Dry-Fried Green Beans</td>
+        <td class="muted">sichuan</td><td class="muted">stir_fry</td>
+        <td class="muted">有图 5/5</td><td class="ings">四季豆、大蒜、猪肉末</td></tr>
+      <tr><td><input type="radio" name="A43" value="lao-gan-ma-green-beans"></td>
+        <td class="zh">老干妈干煸四季豆</td><td class="muted">Dry-Fried Green Beans with Lao Gan Ma</td>
+        <td class="muted">creative</td><td class="muted">stir_fry</td>
+        <td class="muted">有图 4/4</td><td class="ings">四季豆、蒜</td></tr></tbody></table>
+  </section>
+  <section class="group">
+    <div class="ghead">A44 · 2 道<span class="badge">相似 0.70</span></div>
+    <table><thead><tr><th>选</th><th>中文名</th><th>English</th><th>菜系</th><th>类型</th><th>图片</th><th>主料</th></tr></thead><tbody>
+      <tr><td><input type="radio" name="A44" value="homestyle-braised-eggplant"></td>
+        <td class="zh">烧茄子</td><td class="muted">Homestyle Braised Eggplant</td>
+        <td class="muted">home_style</td><td class="muted">roast</td>
+        <td class="muted">有图 6/6</td><td class="ings">小葱、茄子、蒜</td></tr>
+      <tr><td><input type="radio" name="A44" value="lao-gan-ma-eggplant"></td>
+        <td class="zh">老干妈烧茄子</td><td class="muted">Braised Eggplant with Lao Gan Ma</td>
+        <td class="muted">creative</td><td class="muted">stir_fry</td>
+        <td class="muted">有图 4/4</td><td class="ings">中国茄子、蒜</td></tr></tbody></table>
+  </section>
+  <section class="group">
+    <div class="ghead">A45 · 2 道<span class="badge">相似 0.70</span></div>
+    <table><thead><tr><th>选</th><th>中文名</th><th>English</th><th>菜系</th><th>类型</th><th>图片</th><th>主料</th></tr></thead><tbody>
+      <tr><td><input type="radio" name="A45" value="northeast-cold-tofu-skin"></td>
+        <td class="zh">东北大拉皮</td><td class="muted">Northeast Cold Tofu Skin Salad</td>
+        <td class="muted">northeastern</td><td class="muted">cold</td>
+        <td class="muted">有图 6/6</td><td class="ings">大拉皮、猪肉馅、胡萝卜、鸡蛋、黄瓜</td></tr>
+      <tr><td><input type="radio" name="A45" value="northeastern-cold-tossed-glass-noodles"></td>
+        <td class="zh">大拉皮</td><td class="muted">Northeastern Cold Tossed Glass Noodles</td>
+        <td class="muted">northeastern</td><td class="muted">cold</td>
+        <td class="muted">有图 4/4</td><td class="ings">拉皮、胡萝卜、蒜、香菜、黄瓜</td></tr></tbody></table>
+  </section>
+  <section class="group">
+    <div class="ghead">A46 · 2 道<span class="badge">相似 0.70</span></div>
+    <table><thead><tr><th>选</th><th>中文名</th><th>English</th><th>菜系</th><th>类型</th><th>图片</th><th>主料</th></tr></thead><tbody>
+      <tr><td><input type="radio" name="A46" value="hakka-stuffed-tofu"></td>
+        <td class="zh">酿豆腐</td><td class="muted">Hakka-Style Stuffed Tofu</td>
+        <td class="muted">hakka</td><td class="muted">stir_fry</td>
+        <td class="muted">有图 5/5</td><td class="ings">嫩豆腐、干香菇、猪肉馅、虾米、鲮鱼肉</td></tr>
+      <tr><td><input type="radio" name="A46" value="hakka-stuffed-tofu-2"></td>
+        <td class="zh">客家酿豆腐</td><td class="muted">Hakka Stuffed Tofu</td>
+        <td class="muted">hakka</td><td class="muted">stir_fry</td>
+        <td class="muted">有图 4/4</td><td class="ings">北豆腐、小葱、干香菇、猪肉末、虾米</td></tr></tbody></table>
+  </section>
+  <section class="group">
+    <div class="ghead">A47 · 2 道<span class="badge">相似 0.70</span></div>
+    <table><thead><tr><th>选</th><th>中文名</th><th>English</th><th>菜系</th><th>类型</th><th>图片</th><th>主料</th></tr></thead><tbody>
+      <tr><td><input type="radio" name="A47" value="clay-pot-rice"></td>
+        <td class="zh">煲仔饭</td><td class="muted">Clay Pot Rice</td>
+        <td class="muted">cantonese</td><td class="muted">braise</td>
+        <td class="muted">有图 9/9</td><td class="ings">上海青一、丝苗米半碗、小葱一、广式腊肠、生姜小半、生抽、白砂糖、腊肉、蚝油、鸡蛋</td></tr>
+      <tr><td><input type="radio" name="A47" value="private-house-style-clay-pot-rice"></td>
+        <td class="zh">私房煲仔饭</td><td class="muted">Private House Style Clay Pot Rice</td>
+        <td class="muted">home_style</td><td class="muted">fried_rice</td>
+        <td class="muted">有图 3/3</td><td class="ings">大米、广式腊肠、腊肉、青菜、鸡蛋</td></tr></tbody></table>
+  </section>
+  <section class="group">
+    <div class="ghead">A48 · 2 道<span class="badge">相似 0.70</span></div>
+    <table><thead><tr><th>选</th><th>中文名</th><th>English</th><th>菜系</th><th>类型</th><th>图片</th><th>主料</th></tr></thead><tbody>
+      <tr><td><input type="radio" name="A48" value="huizhou-kudzu-root-dumplings"></td>
+        <td class="zh">徽州葛粉圆子</td><td class="muted">Huizhou Kudzu Root Dumplings</td>
+        <td class="muted">home_style</td><td class="muted">stir_fry</td>
+        <td class="muted">有图 5/5</td><td class="ings">熟花生碎、笋干、葛根粉、豆干、香菇</td></tr>
+      <tr><td><input type="radio" name="A48" value="kudzu-root-starch-dumplings"></td>
+        <td class="zh">葛粉圆子</td><td class="muted">Kudzu Root Starch Dumplings</td>
+        <td class="muted">anhui</td><td class="muted">dessert</td>
+        <td class="muted">有图 4/4</td><td class="ings">冬笋、小葱、猪肉末、葛根粉、香菇</td></tr></tbody></table>
+  </section>
+  <section class="group">
+    <div class="ghead">A49 · 2 道<span class="badge">相似 0.70</span></div>
+    <table><thead><tr><th>选</th><th>中文名</th><th>English</th><th>菜系</th><th>类型</th><th>图片</th><th>主料</th></tr></thead><tbody>
+      <tr><td><input type="radio" name="A49" value="savory-tea-oil-with-crispy-fritters"></td>
+        <td class="zh">油茶馓子</td><td class="muted">Savory Tea Oil With Crispy Fritters</td>
+        <td class="muted">jiangsu</td><td class="muted">staple</td>
+        <td class="muted">有图 4/4</td><td class="ings">猪油、芝麻、花生碎、面粉</td></tr>
+      <tr><td><input type="radio" name="A49" value="halal-sesame-fritters"></td>
+        <td class="zh">馓子</td><td class="muted">Halal Sesame Fritters (Sanzi)</td>
+        <td class="muted">halal</td><td class="muted">dessert</td>
+        <td class="muted">有图 3/3</td><td class="ings">面粉</td></tr></tbody></table>
+  </section>
+  <section class="group">
+    <div class="ghead">A50 · 2 道<span class="badge">相似 0.70</span></div>
+    <table><thead><tr><th>选</th><th>中文名</th><th>English</th><th>菜系</th><th>类型</th><th>图片</th><th>主料</th></tr></thead><tbody>
+      <tr><td><input type="radio" name="A50" value="mapo-tofu-mp"></td>
+        <td class="zh">麻婆豆腐</td><td class="muted">Mapo Tofu</td>
+        <td class="muted">sichuan</td><td class="muted">stir_fry</td>
+        <td class="muted">有图 7/7</td><td class="ings">嫩豆腐、猪肉馅</td></tr>
+      <tr><td><input type="radio" name="A50" value="vegetarian-mapo-tofu"></td>
+        <td class="zh">素麻婆豆腐</td><td class="muted">Vegetarian Mapo Tofu</td>
+        <td class="muted">sichuan</td><td class="muted">stir_fry</td>
+        <td class="muted">有图 5/5</td><td class="ings">嫩豆腐、豆豉、香菇</td></tr></tbody></table>
+  </section>
+  <section class="group">
+    <div class="ghead">A51 · 2 道<span class="badge">相似 0.70</span></div>
+    <table><thead><tr><th>选</th><th>中文名</th><th>English</th><th>菜系</th><th>类型</th><th>图片</th><th>主料</th></tr></thead><tbody>
+      <tr><td><input type="radio" name="A51" value="west-lake-lotus-root-pudding"></td>
+        <td class="zh">西湖藕粉</td><td class="muted">West Lake Lotus Root Starch Pudding</td>
+        <td class="muted">zhejiang</td><td class="muted">staple</td>
+        <td class="muted">有图 3/3</td><td class="ings">凉开水、沸水、西湖藕粉</td></tr>
+      <tr><td><input type="radio" name="A51" value="lotus-root-starch-porridge"></td>
+        <td class="zh">藕粉</td><td class="muted">Lotus Root Starch Porridge</td>
+        <td class="muted">home_style</td><td class="muted">dessert</td>
+        <td class="muted">有图 1/1</td><td class="ings">沸水、纯藕粉</td></tr></tbody></table>
+  </section>
+  <section class="group">
+    <div class="ghead">A52 · 2 道<span class="badge">相似 0.68</span></div>
+    <table><thead><tr><th>选</th><th>中文名</th><th>English</th><th>菜系</th><th>类型</th><th>图片</th><th>主料</th></tr></thead><tbody>
+      <tr><td><input type="radio" name="A52" value="radish-soup"></td>
+        <td class="zh">萝卜汤</td><td class="muted">Daikon Radish Soup</td>
+        <td class="muted">zen</td><td class="muted">soup</td>
+        <td class="muted">有图 3/3</td><td class="ings">姜、白萝卜</td></tr>
+      <tr><td><input type="radio" name="A52" value="lamb-and-radish-soup"></td>
+        <td class="zh">羊肉萝卜汤</td><td class="muted">Lamb and Radish Soup</td>
+        <td class="muted">northwestern</td><td class="muted">soup</td>
+        <td class="muted">有图 3/3</td><td class="ings">大葱、生姜、白萝卜、羊腿肉</td></tr></tbody></table>
+  </section>
+  <section class="group">
+    <div class="ghead">A53 · 2 道<span class="badge">相似 0.68</span></div>
+    <table><thead><tr><th>选</th><th>中文名</th><th>English</th><th>菜系</th><th>类型</th><th>图片</th><th>主料</th></tr></thead><tbody>
+      <tr><td><input type="radio" name="A53" value="tea-art-taro-paste"></td>
+        <td class="zh">太极芋泥</td><td class="muted">Tea Art Taro Paste</td>
+        <td class="muted">fujian</td><td class="muted">dessert</td>
+        <td class="muted">有图 5/5</td><td class="ings">熟芝麻、猪油、芋头</td></tr>
+      <tr><td><input type="radio" name="A53" value="fujian-sweet-taro-paste"></td>
+        <td class="zh">芋泥</td><td class="muted">Fujian Sweet Taro Paste</td>
+        <td class="muted">fujian</td><td class="muted">dessert</td>
+        <td class="muted">有图 4/4</td><td class="ings">槟榔芋、熟猪油、猪油</td></tr></tbody></table>
+  </section>
+  <section class="group">
+    <div class="ghead">A54 · 2 道<span class="badge">相似 0.68</span></div>
+    <table><thead><tr><th>选</th><th>中文名</th><th>English</th><th>菜系</th><th>类型</th><th>图片</th><th>主料</th></tr></thead><tbody>
+      <tr><td><input type="radio" name="A54" value="yunnan-steam-pot-chicken"></td>
+        <td class="zh">云南汽锅鸡</td><td class="muted">Yunnan Steam Pot Chicken</td>
+        <td class="muted">yunnan</td><td class="muted">soup</td>
+        <td class="muted">有图 5/5</td><td class="ings">姜、小葱、鸡腿肉</td></tr>
+      <tr><td><input type="radio" name="A54" value="steamer-pot-chicken"></td>
+        <td class="zh">汽锅鸡</td><td class="muted">Steamer Pot Chicken</td>
+        <td class="muted">yunnan</td><td class="muted">stir_fry</td>
+        <td class="muted">有图 4/4</td><td class="ings">土鸡、姜、葱</td></tr></tbody></table>
+  </section>
+  <section class="group">
+    <div class="ghead">A55 · 2 道<span class="badge">相似 0.68</span></div>
+    <table><thead><tr><th>选</th><th>中文名</th><th>English</th><th>菜系</th><th>类型</th><th>图片</th><th>主料</th></tr></thead><tbody>
+      <tr><td><input type="radio" name="A55" value="yunnan-milk-fan"></td>
+        <td class="zh">乳扇</td><td class="muted">Yunnan Milk Fan (Rushan)</td>
+        <td class="muted">yunnan</td><td class="muted">staple</td>
+        <td class="muted">有图 5/5</td><td class="ings">乳扇、炼乳、花生碎</td></tr>
+      <tr><td><input type="radio" name="A55" value="dali-cheese-fan-sachima"></td>
+        <td class="zh">大理乳扇沙琪玛</td><td class="muted">Dali Cheese Fan Sachima</td>
+        <td class="muted">yunnan</td><td class="muted">dessert</td>
+        <td class="muted">有图 5/5</td><td class="ings">乳扇、面粉、鸡蛋</td></tr></tbody></table>
+  </section>
+  <section class="group">
+    <div class="ghead">A56 · 2 道<span class="badge">相似 0.68</span></div>
+    <table><thead><tr><th>选</th><th>中文名</th><th>English</th><th>菜系</th><th>类型</th><th>图片</th><th>主料</th></tr></thead><tbody>
+      <tr><td><input type="radio" name="A56" value="xinjiang-spicy-numbing-chicken"></td>
+        <td class="zh">椒麻鸡</td><td class="muted">Xinjiang Spicy Numbing Chicken</td>
+        <td class="muted">xinjiang</td><td class="muted">stir_fry</td>
+        <td class="muted">有图 6/6</td><td class="ings">大葱、洋葱、鸡腿肉</td></tr>
+      <tr><td><input type="radio" name="A56" value="xinjiang-numbing-pepper-chicken"></td>
+        <td class="zh">新疆椒麻鸡</td><td class="muted">Xinjiang Numbing Pepper Chicken</td>
+        <td class="muted">xinjiang</td><td class="muted">cold</td>
+        <td class="muted">有图 5/5</td><td class="ings">土鸡、洋葱、青椒</td></tr></tbody></table>
+  </section>
+  <section class="group">
+    <div class="ghead">A57 · 2 道<span class="badge">相似 0.68</span></div>
+    <table><thead><tr><th>选</th><th>中文名</th><th>English</th><th>菜系</th><th>类型</th><th>图片</th><th>主料</th></tr></thead><tbody>
+      <tr><td><input type="radio" name="A57" value="black-sesame-sweet-porridge"></td>
+        <td class="zh">芝麻糊</td><td class="muted">Black Sesame Sweet Porridge</td>
+        <td class="muted">cantonese</td><td class="muted">dessert</td>
+        <td class="muted">有图 6/6</td><td class="ings">清水、糯米、黑芝麻</td></tr>
+      <tr><td><input type="radio" name="A57" value="black-sesame-paste"></td>
+        <td class="zh">黑芝麻糊</td><td class="muted">Black Sesame Paste</td>
+        <td class="muted">home_style</td><td class="muted">dessert</td>
+        <td class="muted">有图 2/2</td><td class="ings">清水、熟黑芝麻、糯米粉</td></tr></tbody></table>
+  </section>
+  <section class="group">
+    <div class="ghead">A58 · 2 道<span class="badge">相似 0.67</span></div>
+    <table><thead><tr><th>选</th><th>中文名</th><th>English</th><th>菜系</th><th>类型</th><th>图片</th><th>主料</th></tr></thead><tbody>
+      <tr><td><input type="radio" name="A58" value="egg-drop-soup"></td>
+        <td class="zh">蛋花汤</td><td class="muted">Egg Drop Soup</td>
+        <td class="muted">home_style</td><td class="muted">soup</td>
+        <td class="muted">有图 12/12</td><td class="ings">淀粉、滑子菇适量我买袋、金针菇一小、香菜两、鸡蛋</td></tr>
+      <tr><td><input type="radio" name="A58" value="lazy-egg-drop-soup"></td>
+        <td class="zh">懒人蛋花汤</td><td class="muted">Lazy Egg Drop Soup</td>
+        <td class="muted">home_style</td><td class="muted">soup</td>
+        <td class="muted">有图 3/3</td><td class="ings">水、鸡蛋</td></tr></tbody></table>
+  </section>
+  <section class="group">
+    <div class="ghead">A59 · 2 道<span class="badge">相似 0.67</span></div>
+    <table><thead><tr><th>选</th><th>中文名</th><th>English</th><th>菜系</th><th>类型</th><th>图片</th><th>主料</th></tr></thead><tbody>
+      <tr><td><input type="radio" name="A59" value="halal-hand-pulled-beef-noodles"></td>
+        <td class="zh">牛肉拉面</td><td class="muted">Halal Hand-Pulled Beef Noodles</td>
+        <td class="muted">halal</td><td class="muted">noodle</td>
+        <td class="muted">有图 6/6</td><td class="ings">小葱、拉面、牛肉、白萝卜、香菜</td></tr>
+      <tr><td><input type="radio" name="A59" value="mala-beef-ramen"></td>
+        <td class="zh">麻辣牛肉拉面</td><td class="muted">Mala Beef Ramen</td>
+        <td class="muted">sichuan</td><td class="muted">boil</td>
+        <td class="muted">有图 4/4</td><td class="ings">拉面、牛肉片</td></tr></tbody></table>
+  </section>
+  <section class="group">
+    <div class="ghead">A60 · 2 道<span class="badge">相似 0.67</span></div>
+    <table><thead><tr><th>选</th><th>中文名</th><th>English</th><th>菜系</th><th>类型</th><th>图片</th><th>主料</th></tr></thead><tbody>
+      <tr><td><input type="radio" name="A60" value="huangqiao-sesame-seed-cake"></td>
+        <td class="zh">黄桥烧饼</td><td class="muted">Huangqiao Sesame Seed Cake</td>
+        <td class="muted">home_style</td><td class="muted">roast</td>
+        <td class="muted">有图 7/7</td><td class="ings">猪油、白芝麻、葱花、面粉</td></tr>
+      <tr><td><input type="radio" name="A60" value="sesame-flatbread"></td>
+        <td class="zh">烧饼</td><td class="muted">Sesame Flatbread (Shao Bing)</td>
+        <td class="muted">northern</td><td class="muted">pan_fry</td>
+        <td class="muted">有图 4/4</td><td class="ings">芝麻、酵母、面粉</td></tr></tbody></table>
+  </section>
+  <section class="group">
+    <div class="ghead">A61 · 2 道<span class="badge">相似 0.67</span></div>
+    <table><thead><tr><th>选</th><th>中文名</th><th>English</th><th>菜系</th><th>类型</th><th>图片</th><th>主料</th></tr></thead><tbody>
+      <tr><td><input type="radio" name="A61" value="cumin-lamb"></td>
+        <td class="zh">孜然羊肉</td><td class="muted">Cumin Lamb</td>
+        <td class="muted">home_style</td><td class="muted">braise</td>
+        <td class="muted">有图 12/12</td><td class="ings">姜三、羊肉、葱、蒜两、辣椒面一小</td></tr>
+      <tr><td><input type="radio" name="A61" value="cumin-lamb-skewers"></td>
+        <td class="zh">孜然羊肉串</td><td class="muted">Cumin Lamb Skewers</td>
+        <td class="muted">northern</td><td class="muted">skewer</td>
+        <td class="muted">有图 4/4</td><td class="ings">羊肉、辣椒面</td></tr></tbody></table>
+  </section>
+  <section class="group">
+    <div class="ghead">A62 · 2 道<span class="badge">相似 0.67</span></div>
+    <table><thead><tr><th>选</th><th>中文名</th><th>English</th><th>菜系</th><th>类型</th><th>图片</th><th>主料</th></tr></thead><tbody>
+      <tr><td><input type="radio" name="A62" value="zongzi"></td>
+        <td class="zh">粽子</td><td class="muted">Zongzi</td>
+        <td class="muted">home_style</td><td class="muted">steam</td>
+        <td class="muted">有图 6/6</td><td class="ings">三层肉、生姜五六、糯米</td></tr>
+      <tr><td><input type="radio" name="A62" value="jiaxing-zongzi"></td>
+        <td class="zh">嘉兴粽子</td><td class="muted">Jiaxing Zongzi</td>
+        <td class="muted">zhejiang</td><td class="muted">steam</td>
+        <td class="muted">有图 5/5</td><td class="ings">五花肉、棉线、粽叶、糯米</td></tr></tbody></table>
+  </section>
+  <section class="group">
+    <div class="ghead">A63 · 2 道<span class="badge">相似 0.67</span></div>
+    <table><thead><tr><th>选</th><th>中文名</th><th>English</th><th>菜系</th><th>类型</th><th>图片</th><th>主料</th></tr></thead><tbody>
+      <tr><td><input type="radio" name="A63" value="family-recipe-mature-duck-soup"></td>
+        <td class="zh">家传老鸭汤</td><td class="muted">Family Recipe Mature Duck Soup</td>
+        <td class="muted">home_style</td><td class="muted">soup</td>
+        <td class="muted">有图 6/6</td><td class="ings">干笋、火腿、生姜、老鸭</td></tr>
+      <tr><td><input type="radio" name="A63" value="old-duck-soup"></td>
+        <td class="zh">老鸭汤</td><td class="muted">Old Duck Soup</td>
+        <td class="muted">anhui</td><td class="muted">soup</td>
+        <td class="muted">有图 3/3</td><td class="ings">姜、老鸭、酸萝卜</td></tr></tbody></table>
+  </section>
+  <section class="group">
+    <div class="ghead">A64 · 2 道<span class="badge">相似 0.67</span></div>
+    <table><thead><tr><th>选</th><th>中文名</th><th>English</th><th>菜系</th><th>类型</th><th>图片</th><th>主料</th></tr></thead><tbody>
+      <tr><td><input type="radio" name="A64" value="jian-dui-deep-fried-sweet-rice-balls"></td>
+        <td class="zh">炸糕</td><td class="muted">Jian Dui (Deep-Fried Sweet Rice Balls)</td>
+        <td class="muted">halal</td><td class="muted">dessert</td>
+        <td class="muted">有图 5/5</td><td class="ings">温水、糯米粉、豆沙、面粉</td></tr>
+      <tr><td><input type="radio" name="A64" value="beijing-cream-puff-cake"></td>
+        <td class="zh">奶油炸糕</td><td class="muted">Beijing Cream Puff Cake</td>
+        <td class="muted">northern</td><td class="muted">dessert</td>
+        <td class="muted">有图 4/4</td><td class="ings">奶油、面粉、鸡蛋</td></tr></tbody></table>
+  </section>
+  <section class="group">
+    <div class="ghead">A65 · 2 道<span class="badge">相似 0.67</span></div>
+    <table><thead><tr><th>选</th><th>中文名</th><th>English</th><th>菜系</th><th>类型</th><th>图片</th><th>主料</th></tr></thead><tbody>
+      <tr><td><input type="radio" name="A65" value="braised-beef-2"></td>
+        <td class="zh">红烧牛肉</td><td class="muted">Braised Beef</td>
+        <td class="muted">home_style</td><td class="muted">roast</td>
+        <td class="muted">有图 6/6</td><td class="ings">土豆、牛腩、胡萝卜</td></tr>
+      <tr><td><input type="radio" name="A65" value="halal-red-braised-beef"></td>
+        <td class="zh">清真红烧牛肉</td><td class="muted">Halal Red-Braised Beef</td>
+        <td class="muted">halal</td><td class="muted">roast</td>
+        <td class="muted">有图 5/5</td><td class="ings">大蒜、小葱、牛腩、生姜</td></tr></tbody></table>
+  </section>
+  <section class="group">
+    <div class="ghead">A66 · 2 道<span class="badge">相似 0.66</span></div>
+    <table><thead><tr><th>选</th><th>中文名</th><th>English</th><th>菜系</th><th>类型</th><th>图片</th><th>主料</th></tr></thead><tbody>
+      <tr><td><input type="radio" name="A66" value="northeast-pickled-cabbage-pork-blood-sausage"></td>
+        <td class="zh">酸菜白肉血肠</td><td class="muted">Northeast Pickled Cabbage, Pork Belly and Blood Sausage</td>
+        <td class="muted">northeastern</td><td class="muted">braise</td>
+        <td class="muted">有图 6/6</td><td class="ings">五花肉、粉丝、血肠、酸菜</td></tr>
+      <tr><td><input type="radio" name="A66" value="northeast-pickled-cabbage-pork"></td>
+        <td class="zh">酸菜白肉</td><td class="muted">Northeast Pickled Cabbage and Pork Belly</td>
+        <td class="muted">northeastern</td><td class="muted">soup</td>
+        <td class="muted">有图 4/4</td><td class="ings">东北酸菜、猪五花肉、生姜、粉丝</td></tr></tbody></table>
+  </section>
+  <section class="group">
+    <div class="ghead">A67 · 2 道<span class="badge">相似 0.66</span></div>
+    <table><thead><tr><th>选</th><th>中文名</th><th>English</th><th>菜系</th><th>类型</th><th>图片</th><th>主料</th></tr></thead><tbody>
+      <tr><td><input type="radio" name="A67" value="cantonese-beef-balls"></td>
+        <td class="zh">牛肉丸</td><td class="muted">Cantonese Beef Balls</td>
+        <td class="muted">cantonese</td><td class="muted">stir_fry</td>
+        <td class="muted">有图 6/6</td><td class="ings">冰水、淀粉、牛后腿肉</td></tr>
+      <tr><td><input type="radio" name="A67" value="braised-beef-meatballs"></td>
+        <td class="zh">烩牛肉丸子</td><td class="muted">Braised Beef Meatballs</td>
+        <td class="muted">halal</td><td class="muted">stir_fry</td>
+        <td class="muted">有图 5/5</td><td class="ings">洋葱、淀粉、牛肉末、生姜、鸡蛋</td></tr></tbody></table>
+  </section>
+  <section class="group">
+    <div class="ghead">A68 · 2 道<span class="badge">相似 0.66</span></div>
+    <table><thead><tr><th>选</th><th>中文名</th><th>English</th><th>菜系</th><th>类型</th><th>图片</th><th>主料</th></tr></thead><tbody>
+      <tr><td><input type="radio" name="A68" value="pan-fried-pork-potstickers"></td>
+        <td class="zh">锅贴</td><td class="muted">Pan-Fried Pork Potstickers</td>
+        <td class="muted">home_style</td><td class="muted">pan_fry</td>
+        <td class="muted">有图 6/6</td><td class="ings">猪肉馅、生姜、虾仁、韭菜、饺子皮</td></tr>
+      <tr><td><input type="radio" name="A68" value="shanghai-potstickers"></td>
+        <td class="zh">上海锅贴</td><td class="muted">Shanghai Potstickers</td>
+        <td class="muted">shanghainese</td><td class="muted">pan_fry</td>
+        <td class="muted">有图 6/6</td><td class="ings">猪肉馅、葱姜水、面粉</td></tr></tbody></table>
+  </section>
+  <section class="group">
+    <div class="ghead">A69 · 2 道<span class="badge">相似 0.65</span></div>
+    <table><thead><tr><th>选</th><th>中文名</th><th>English</th><th>菜系</th><th>类型</th><th>图片</th><th>主料</th></tr></thead><tbody>
+      <tr><td><input type="radio" name="A69" value="shihezi-cold-skin-noodles"></td>
+        <td class="zh">石河子凉皮</td><td class="muted">Shihezi Cold Skin Noodles</td>
+        <td class="muted">xinjiang</td><td class="muted">cold</td>
+        <td class="muted">有图 5/5</td><td class="ings">凉皮、花生碎、面筋、香菜、黄瓜</td></tr>
+      <tr><td><input type="radio" name="A69" value="liangpi"></td>
+        <td class="zh">凉皮</td><td class="muted">Liangpi (Cold Skin Noodles)</td>
+        <td class="muted">northern</td><td class="muted">cold</td>
+        <td class="muted">有图 4/4</td><td class="ings">水、澄粉、蒜、黄瓜</td></tr></tbody></table>
+  </section>
+  <section class="group">
+    <div class="ghead">A70 · 2 道<span class="badge">相似 0.65</span></div>
+    <table><thead><tr><th>选</th><th>中文名</th><th>English</th><th>菜系</th><th>类型</th><th>图片</th><th>主料</th></tr></thead><tbody>
+      <tr><td><input type="radio" name="A70" value="soup-dumplings"></td>
+        <td class="zh">汤包</td><td class="muted">Soup Dumplings</td>
+        <td class="muted">hubei</td><td class="muted">soup</td>
+        <td class="muted">有图 6/6</td><td class="ings">中筋面粉、温水、猪皮冻、猪肉馅、生姜</td></tr>
+      <tr><td><input type="radio" name="A70" value="crab-roe-soup-dumplings"></td>
+        <td class="zh">蟹黄汤包</td><td class="muted">Crab Roe Soup Dumplings</td>
+        <td class="muted">jiangsu</td><td class="muted">soup</td>
+        <td class="muted">有图 5/5</td><td class="ings">猪五花肉、猪皮冻、蟹肉、面粉</td></tr></tbody></table>
+  </section>
+  <section class="group">
+    <div class="ghead">A71 · 2 道<span class="badge">相似 0.63</span></div>
+    <table><thead><tr><th>选</th><th>中文名</th><th>English</th><th>菜系</th><th>类型</th><th>图片</th><th>主料</th></tr></thead><tbody>
+      <tr><td><input type="radio" name="A71" value="drunken-chicken"></td>
+        <td class="zh">醉鸡</td><td class="muted">Drunken Chicken</td>
+        <td class="muted">shanghainese</td><td class="muted">boil</td>
+        <td class="muted">有图 10/10</td><td class="ings">八角、姜片、当归、枸杞、生抽、盐、糖、红枣、花雕酒、香叶、鸡腿</td></tr>
+      <tr><td><input type="radio" name="A71" value="shaoxing-wine-poached-chicken"></td>
+        <td class="zh">绍兴醉鸡</td><td class="muted">Shaoxing Wine Poached Chicken</td>
+        <td class="muted">zhejiang</td><td class="muted">cold</td>
+        <td class="muted">有图 6/6</td><td class="ings">姜、小葱、糟卤、鸡腿</td></tr></tbody></table>
+  </section>
+  <section class="group">
+    <div class="ghead">A72 · 2 道<span class="badge">相似 0.60</span></div>
+    <table><thead><tr><th>选</th><th>中文名</th><th>English</th><th>菜系</th><th>类型</th><th>图片</th><th>主料</th></tr></thead><tbody>
+      <tr><td><input type="radio" name="A72" value="pumpkin-congee"></td>
+        <td class="zh">南瓜粥</td><td class="muted">Pumpkin Congee</td>
+        <td class="muted">home_style</td><td class="muted">congee</td>
+        <td class="muted">有图 4/4</td><td class="ings">南瓜、大米</td></tr>
+      <tr><td><input type="radio" name="A72" value="millet-pumpkin-congee"></td>
+        <td class="zh">小米南瓜粥</td><td class="muted">Millet and Pumpkin Congee</td>
+        <td class="muted">home_style</td><td class="muted">congee</td>
+        <td class="muted">有图 4/4</td><td class="ings">小米、老南瓜</td></tr></tbody></table>
+  </section>
+  <section class="group">
+    <div class="ghead">A73 · 2 道<span class="badge">相似 0.60</span></div>
+    <table><thead><tr><th>选</th><th>中文名</th><th>English</th><th>菜系</th><th>类型</th><th>图片</th><th>主料</th></tr></thead><tbody>
+      <tr><td><input type="radio" name="A73" value="shanghai-soy-braised-duck"></td>
+        <td class="zh">酱鸭</td><td class="muted">Shanghai Soy-Braised Duck</td>
+        <td class="muted">shanghainese</td><td class="muted">cold</td>
+        <td class="muted">有图 7/7</td><td class="ings">鸭子</td></tr>
+      <tr><td><input type="radio" name="A73" value="shanghai-soy-sauce-duck"></td>
+        <td class="zh">本帮酱鸭</td><td class="muted">Shanghai Soy Sauce Duck</td>
+        <td class="muted">shanghainese</td><td class="muted">stir_fry</td>
+        <td class="muted">有图 7/7</td><td class="ings">鸭</td></tr></tbody></table>
+  </section>
+  <section class="group">
+    <div class="ghead">A74 · 2 道<span class="badge">相似 0.60</span></div>
+    <table><thead><tr><th>选</th><th>中文名</th><th>English</th><th>菜系</th><th>类型</th><th>图片</th><th>主料</th></tr></thead><tbody>
+      <tr><td><input type="radio" name="A74" value="sichuan-beef-tripe"></td>
+        <td class="zh">毛肚</td><td class="muted">Sichuan Beef Tripe</td>
+        <td class="muted">home_style</td><td class="muted">stir_fry</td>
+        <td class="muted">有图 6/6</td><td class="ings">姜、毛肚、蒜、韭菜</td></tr>
+      <tr><td><input type="radio" name="A74" value="cold-dressed-tripe"></td>
+        <td class="zh">凉拌毛肚</td><td class="muted">Cold-Dressed Beef Tripe</td>
+        <td class="muted">sichuan</td><td class="muted">cold</td>
+        <td class="muted">有图 6/6</td><td class="ings">大蒜、小米辣、牛毛肚、香菜</td></tr></tbody></table>
+  </section>
+  <section class="group">
+    <div class="ghead">A75 · 2 道<span class="badge">相似 0.60</span></div>
+    <table><thead><tr><th>选</th><th>中文名</th><th>English</th><th>菜系</th><th>类型</th><th>图片</th><th>主料</th></tr></thead><tbody>
+      <tr><td><input type="radio" name="A75" value="har-gow"></td>
+        <td class="zh">虾饺</td><td class="muted">Har Gow (Shrimp Dumplings)</td>
+        <td class="muted">cantonese</td><td class="muted">steam</td>
+        <td class="muted">有图 12/12</td><td class="ings">开水、澄粉、玉米淀粉、胡萝卜半、葱、虾、饺子皮、馅料、马蹄</td></tr>
+      <tr><td><input type="radio" name="A75" value="crystal-shrimp-dumplings"></td>
+        <td class="zh">水晶虾饺</td><td class="muted">Crystal Shrimp Dumplings</td>
+        <td class="muted">home_style</td><td class="muted">staple</td>
+        <td class="muted">有图 5/5</td><td class="ings">冬笋、澄面、猪肥膘、生粉、虾仁</td></tr></tbody></table>
+  </section>
+  <section class="group">
+    <div class="ghead">A76 · 2 道<span class="badge">相似 0.60</span></div>
+    <table><thead><tr><th>选</th><th>中文名</th><th>English</th><th>菜系</th><th>类型</th><th>图片</th><th>主料</th></tr></thead><tbody>
+      <tr><td><input type="radio" name="A76" value="dumplings"></td>
+        <td class="zh">饺子</td><td class="muted">Pork &amp; Cabbage Dumplings (Jiao Zi)</td>
+        <td class="muted">northern</td><td class="muted">boil</td>
+        <td class="muted">有图 5/5</td><td class="ings">猪肉末、白菜、葱、饺子皮</td></tr>
+      <tr><td><input type="radio" name="A76" value="northeast-pickled-cabbage-dumplings"></td>
+        <td class="zh">酸菜饺子</td><td class="muted">Northeast Pickled Cabbage Dumplings</td>
+        <td class="muted">northeastern</td><td class="muted">boil</td>
+        <td class="muted">无图</td><td class="ings">东北酸菜、姜、小葱、猪肉馅、面粉</td></tr></tbody></table>
+  </section>
+  <section class="group">
+    <div class="ghead">A77 · 2 道<span class="badge">相似 0.60</span></div>
+    <table><thead><tr><th>选</th><th>中文名</th><th>English</th><th>菜系</th><th>类型</th><th>图片</th><th>主料</th></tr></thead><tbody>
+      <tr><td><input type="radio" name="A77" value="braised-assorted-platter"></td>
+        <td class="zh">卤味拼盘</td><td class="muted">Braised Assorted Platter</td>
+        <td class="muted">home_style</td><td class="muted">cold</td>
+        <td class="muted">有图 4/4</td><td class="ings">卤牛肉、卤猪耳、卤猪肚、卤蛋、卤豆干</td></tr>
+      <tr><td><input type="radio" name="A77" value="family-recipe-braised-delicacies-platter"></td>
+        <td class="zh">家传卤味拼盘</td><td class="muted">Family Recipe Braised Delicacies Platter</td>
+        <td class="muted">home_style</td><td class="muted">cold</td>
+        <td class="muted">有图 4/4</td><td class="ings">牛腱子、豆干、鸡胗、鸡蛋</td></tr></tbody></table>
+  </section>
+  <section class="group">
+    <div class="ghead">A78 · 2 道<span class="badge">相似 0.60</span></div>
+    <table><thead><tr><th>选</th><th>中文名</th><th>English</th><th>菜系</th><th>类型</th><th>图片</th><th>主料</th></tr></thead><tbody>
+      <tr><td><input type="radio" name="A78" value="green-tea"></td>
+        <td class="zh">绿茶</td><td class="muted">Green Tea</td>
+        <td class="muted">home_style</td><td class="muted">drink</td>
+        <td class="muted">有图 1/1</td><td class="ings">绿茶</td></tr>
+      <tr><td><input type="radio" name="A78" value="jade-tea-punch"></td>
+        <td class="zh">翡翠绿茶宾治</td><td class="muted">Jade Tea Punch</td>
+        <td class="muted">creative</td><td class="muted">cocktail</td>
+        <td class="muted">无图</td><td class="ings">柠檬汁、白朗姆、茉莉绿茶</td></tr></tbody></table>
+  </section>
+  <section class="group">
+    <div class="ghead">A79 · 2 道<span class="badge">相似 0.60</span></div>
+    <table><thead><tr><th>选</th><th>中文名</th><th>English</th><th>菜系</th><th>类型</th><th>图片</th><th>主料</th></tr></thead><tbody>
+      <tr><td><input type="radio" name="A79" value="hakka-sweet-rice-wine-chicken"></td>
+        <td class="zh">客家娘酒鸡</td><td class="muted">Hakka Sweet Rice Wine Chicken</td>
+        <td class="muted">hakka</td><td class="muted">stir_fry</td>
+        <td class="muted">有图 7/7</td><td class="ings">整鸡、老姜</td></tr>
+      <tr><td><input type="radio" name="A79" value="hakka-niangjiu-chicken"></td>
+        <td class="zh">娘酒鸡</td><td class="muted">Hakka Niangjiu Chicken</td>
+        <td class="muted">hakka</td><td class="muted">stir_fry</td>
+        <td class="muted">有图 3/3</td><td class="ings">姜、鸡</td></tr></tbody></table>
+  </section>
+  <section class="group">
+    <div class="ghead">A80 · 2 道<span class="badge">相似 0.60</span></div>
+    <table><thead><tr><th>选</th><th>中文名</th><th>English</th><th>菜系</th><th>类型</th><th>图片</th><th>主料</th></tr></thead><tbody>
+      <tr><td><input type="radio" name="A80" value="salt-baked-chicken"></td>
+        <td class="zh">盐焗鸡</td><td class="muted">Salt-Baked Chicken</td>
+        <td class="muted">cantonese</td><td class="muted">braise</td>
+        <td class="muted">有图 5/5</td><td class="ings">嫩母鸡、配料步骤中有注明</td></tr>
+      <tr><td><input type="radio" name="A80" value="cantonese-salt-baked-chicken-wings"></td>
+        <td class="zh">盐焗鸡翅</td><td class="muted">Cantonese Salt-Baked Chicken Wings</td>
+        <td class="muted">cantonese</td><td class="muted">stir_fry</td>
+        <td class="muted">有图 4/4</td><td class="ings">小葱、生姜、鸡翅中</td></tr></tbody></table>
+  </section>
+  <section class="group">
+    <div class="ghead">A81 · 2 道<span class="badge">相似 0.60</span></div>
+    <table><thead><tr><th>选</th><th>中文名</th><th>English</th><th>菜系</th><th>类型</th><th>图片</th><th>主料</th></tr></thead><tbody>
+      <tr><td><input type="radio" name="A81" value="twice-cooked-pork-mp"></td>
+        <td class="zh">回锅肉</td><td class="muted">Twice-Cooked Pork</td>
+        <td class="muted">sichuan</td><td class="muted">stir_fry</td>
+        <td class="muted">有图 6/6</td><td class="ings">猪五花肉、豆豉、青蒜</td></tr>
+      <tr><td><input type="radio" name="A81" value="lao-gan-ma-twice-cooked-pork"></td>
+        <td class="zh">老干妈回锅肉</td><td class="muted">Twice-Cooked Pork with Lao Gan Ma</td>
+        <td class="muted">creative</td><td class="muted">stir_fry</td>
+        <td class="muted">有图 5/5</td><td class="ings">五花肉、蒜、青椒</td></tr></tbody></table>
+  </section>
+  <section class="group">
+    <div class="ghead">A82 · 2 道<span class="badge">相似 0.60</span></div>
+    <table><thead><tr><th>选</th><th>中文名</th><th>English</th><th>菜系</th><th>类型</th><th>图片</th><th>主料</th></tr></thead><tbody>
+      <tr><td><input type="radio" name="A82" value="siu-mai"></td>
+        <td class="zh">烧卖</td><td class="muted">Siu Mai (Pork &amp; Shrimp Dumplings)</td>
+        <td class="muted">cantonese</td><td class="muted">steam</td>
+        <td class="muted">有图 4/4</td><td class="ings">云吞皮、猪肉末、虾、香菇</td></tr>
+      <tr><td><input type="radio" name="A82" value="halal-lamb-shumai"></td>
+        <td class="zh">羊肉烧卖</td><td class="muted">Halal Lamb Shumai</td>
+        <td class="muted">home_style</td><td class="muted">steam</td>
+        <td class="muted">有图 4/4</td><td class="ings">洋葱、烧卖皮、生姜、羊肉末</td></tr></tbody></table>
+  </section>
+  <section class="group">
+    <div class="ghead">A83 · 2 道<span class="badge">相似 0.60</span></div>
+    <table><thead><tr><th>选</th><th>中文名</th><th>English</th><th>菜系</th><th>类型</th><th>图片</th><th>主料</th></tr></thead><tbody>
+      <tr><td><input type="radio" name="A83" value="dai-style-hand-picked-rice"></td>
+        <td class="zh">傣族手抓饭</td><td class="muted">Dai-Style Hand-Picked Rice</td>
+        <td class="muted">yunnan</td><td class="muted">staple</td>
+        <td class="muted"><span class="warn">图 6/7</span></td><td class="ings">烤五花肉、烤鱼、糯米、紫米、菠萝</td></tr>
+      <tr><td><input type="radio" name="A83" value="xinjiang-hand-grabbed-rice"></td>
+        <td class="zh">手抓饭</td><td class="muted">Xinjiang Hand-Grabbed Rice</td>
+        <td class="muted">xinjiang</td><td class="muted">staple</td>
+        <td class="muted">有图 4/4</td><td class="ings">大米、洋葱、羊肉、胡萝卜、葡萄干</td></tr></tbody></table>
+  </section>
+  <section class="group">
+    <div class="ghead">A84 · 2 道<span class="badge">相似 0.60</span></div>
+    <table><thead><tr><th>选</th><th>中文名</th><th>English</th><th>菜系</th><th>类型</th><th>图片</th><th>主料</th></tr></thead><tbody>
+      <tr><td><input type="radio" name="A84" value="home-style-clay-pot-tofu"></td>
+        <td class="zh">家常豆腐煲</td><td class="muted">Home-Style Clay Pot Tofu</td>
+        <td class="muted">home_style</td><td class="muted">braise</td>
+        <td class="muted">有图 7/7</td><td class="ings">五花肉片、北豆腐、木耳、红椒、青椒</td></tr>
+      <tr><td><input type="radio" name="A84" value="clay-pot-soft-shell-crab-tofu"></td>
+        <td class="zh">梭子蟹豆腐煲</td><td class="muted">Clay Pot Soft-shell Crab and Tofu</td>
+        <td class="muted">fujian</td><td class="muted">braise</td>
+        <td class="muted">有图 4/4</td><td class="ings">嫩豆腐、小葱、梭子蟹、生姜</td></tr></tbody></table>
+  </section>
+  <section class="group">
+    <div class="ghead">A85 · 2 道<span class="badge">相似 0.60</span></div>
+    <table><thead><tr><th>选</th><th>中文名</th><th>English</th><th>菜系</th><th>类型</th><th>图片</th><th>主料</th></tr></thead><tbody>
+      <tr><td><input type="radio" name="A85" value="hakka-savory-pancake"></td>
+        <td class="zh">薄饼</td><td class="muted">Hakka Savory Pancake</td>
+        <td class="muted">hakka</td><td class="muted">pan_fry</td>
+        <td class="muted">有图 6/6</td><td class="ings">中筋面粉、温水、猪五花肉、豆芽</td></tr>
+      <tr><td><input type="radio" name="A85" value="xiamen-spring-roll"></td>
+        <td class="zh">厦门薄饼</td><td class="muted">Xiamen Spring Roll</td>
+        <td class="muted">fujian</td><td class="muted">pan_fry</td>
+        <td class="muted">有图 5/5</td><td class="ings">五花肉、包菜、胡萝卜、薄饼皮、豆干</td></tr></tbody></table>
+  </section>
+  <section class="group">
+    <div class="ghead">A86 · 2 道<span class="badge">相似 0.60</span></div>
+    <table><thead><tr><th>选</th><th>中文名</th><th>English</th><th>菜系</th><th>类型</th><th>图片</th><th>主料</th></tr></thead><tbody>
+      <tr><td><input type="radio" name="A86" value="northeastern-braised-pork-ribs-green-beans"></td>
+        <td class="zh">排骨炖豆角</td><td class="muted">Northeastern Braised Pork Ribs with Green Beans</td>
+        <td class="muted">northeastern</td><td class="muted">braise</td>
+        <td class="muted">有图 5/5</td><td class="ings">土豆、油豆角、猪肋排</td></tr>
+      <tr><td><input type="radio" name="A86" value="home-style-braised-green-beans"></td>
+        <td class="zh">家常炖豆角</td><td class="muted">Home-Style Braised Green Beans</td>
+        <td class="muted">northeastern</td><td class="muted">braise</td>
+        <td class="muted">有图 4/4</td><td class="ings">大蒜、豆角</td></tr></tbody></table>
+  </section>
+  <section class="group">
+    <div class="ghead">A87 · 2 道<span class="badge">相似 0.60</span></div>
+    <table><thead><tr><th>选</th><th>中文名</th><th>English</th><th>菜系</th><th>类型</th><th>图片</th><th>主料</th></tr></thead><tbody>
+      <tr><td><input type="radio" name="A87" value="house-slowed-lamb-radish"></td>
+        <td class="zh">萝卜炖羊肉</td><td class="muted">House-Slowed Lamb Shank with Daikon Radish</td>
+        <td class="muted">home_style</td><td class="muted">braise</td>
+        <td class="muted">有图 5/5</td><td class="ings">姜、小葱、白萝卜、羊肉</td></tr>
+      <tr><td><input type="radio" name="A87" value="northwestern-lamb-carrot-stew"></td>
+        <td class="zh">胡萝卜炖羊肉</td><td class="muted">Northwestern Lamb and Carrot Stew</td>
+        <td class="muted">northwestern</td><td class="muted">braise</td>
+        <td class="muted"><span class="warn">图 3/4</span></td><td class="ings">大葱、生姜、羊腿肉、胡萝卜</td></tr></tbody></table>
+  </section>
+  <section class="group">
+    <div class="ghead">A88 · 2 道<span class="badge">相似 0.60</span></div>
+    <table><thead><tr><th>选</th><th>中文名</th><th>English</th><th>菜系</th><th>类型</th><th>图片</th><th>主料</th></tr></thead><tbody>
+      <tr><td><input type="radio" name="A88" value="red-braised-pork-belly-mp"></td>
+        <td class="zh">红烧肉</td><td class="muted">Red Braised Pork Belly</td>
+        <td class="muted">shanghainese</td><td class="muted">roast</td>
+        <td class="muted">有图 6/6</td><td class="ings">猪五花肉</td></tr>
+      <tr><td><input type="radio" name="A88" value="private-house-style-red-braised-pork-belly"></td>
+        <td class="zh">私房红烧肉</td><td class="muted">Private House Style Red-Braised Pork Belly</td>
+        <td class="muted">home_style</td><td class="muted">roast</td>
+        <td class="muted">有图 5/5</td><td class="ings">五花肉</td></tr></tbody></table>
+  </section>
+  <section class="group">
+    <div class="ghead">A89 · 2 道<span class="badge">相似 0.60</span></div>
+    <table><thead><tr><th>选</th><th>中文名</th><th>English</th><th>菜系</th><th>类型</th><th>图片</th><th>主料</th></tr></thead><tbody>
+      <tr><td><input type="radio" name="A89" value="braised-jumbo-shrimp"></td>
+        <td class="zh">油焖大虾</td><td class="muted">Braised Jumbo Shrimp</td>
+        <td class="muted">shandong</td><td class="muted">braise</td>
+        <td class="muted">有图 5/5</td><td class="ings">对虾</td></tr>
+      <tr><td><input type="radio" name="A89" value="private-house-style-braised-jumbo-shrimp"></td>
+        <td class="zh">私房油焖大虾</td><td class="muted">Private House Style Braised Jumbo Shrimp</td>
+        <td class="muted">home_style</td><td class="muted">braise</td>
+        <td class="muted">有图 5/5</td><td class="ings">大虾</td></tr></tbody></table>
+  </section>
+  <section class="group">
+    <div class="ghead">A90 · 2 道<span class="badge">相似 0.60</span></div>
+    <table><thead><tr><th>选</th><th>中文名</th><th>English</th><th>菜系</th><th>类型</th><th>图片</th><th>主料</th></tr></thead><tbody>
+      <tr><td><input type="radio" name="A90" value="signature-spicy-crab"></td>
+        <td class="zh">独门香辣蟹</td><td class="muted">Signature Spicy Crab</td>
+        <td class="muted">home_style</td><td class="muted">stir_fry</td>
+        <td class="muted">有图 7/7</td><td class="ings">蒜、螃蟹</td></tr>
+      <tr><td><input type="radio" name="A90" value="private-house-style-spicy-crab"></td>
+        <td class="zh">私房香辣蟹</td><td class="muted">Private House Style Spicy Crab</td>
+        <td class="muted">home_style</td><td class="muted">stir_fry</td>
+        <td class="muted">有图 3/3</td><td class="ings">大蒜、梭子蟹大闸蟹</td></tr></tbody></table>
+  </section>
+  <section class="group">
+    <div class="ghead">A91 · 2 道<span class="badge">相似 0.60</span></div>
+    <table><thead><tr><th>选</th><th>中文名</th><th>English</th><th>菜系</th><th>类型</th><th>图片</th><th>主料</th></tr></thead><tbody>
+      <tr><td><input type="radio" name="A91" value="kou-shui-ji-mp"></td>
+        <td class="zh">口水鸡</td><td class="muted">Kou Shui Ji</td>
+        <td class="muted">sichuan</td><td class="muted">cold</td>
+        <td class="muted">有图 6/6</td><td class="ings">土鸡</td></tr>
+      <tr><td><input type="radio" name="A91" value="house-style-mouth-watering-chicken"></td>
+        <td class="zh">私房口水鸡</td><td class="muted">House-Style Mouth-Watering Chicken</td>
+        <td class="muted">home_style</td><td class="muted">cold</td>
+        <td class="muted">有图 5/5</td><td class="ings">鸡腿</td></tr></tbody></table>
+  </section><h2 class="sec">B 档 · 11 组 / 22 道<span class="sub">疑似重复，需人工判断，不选=不是重复</span></h2>
+  <section class="group">
+    <div class="ghead">B1 · 2 道<span class="badge">相似 0.88</span></div>
+    <table><thead><tr><th>选</th><th>中文名</th><th>English</th><th>菜系</th><th>类型</th><th>图片</th><th>主料</th></tr></thead><tbody>
+      <tr><td><input type="radio" name="B1" value="sauteed-indian-lettuce-garlic"></td>
+        <td class="zh">蒜蓉炒油麦菜</td><td class="muted">Sautéed Indian Lettuce with Garlic</td>
+        <td class="muted">home_style</td><td class="muted">stir_fry</td>
+        <td class="muted">有图 4/4</td><td class="ings">油麦菜、蒜</td></tr>
+      <tr><td><input type="radio" name="B1" value="indian-lettuce-garlic-sauce"></td>
+        <td class="zh">蒜蓉油麦菜</td><td class="muted">Indian Lettuce with Garlic Sauce</td>
+        <td class="muted">cantonese</td><td class="muted">stir_fry</td>
+        <td class="muted">有图 2/2</td><td class="ings">油麦菜、蒜</td></tr></tbody></table>
+  </section>
+  <section class="group">
+    <div class="ghead">B2 · 2 道<span class="badge">相似 0.86</span></div>
+    <table><thead><tr><th>选</th><th>中文名</th><th>English</th><th>菜系</th><th>类型</th><th>图片</th><th>主料</th></tr></thead><tbody>
+      <tr><td><input type="radio" name="B2" value="wuxi-soy-braised-pork-ribs"></td>
+        <td class="zh">无锡酱排骨</td><td class="muted">Wuxi Soy-Braised Pork Ribs</td>
+        <td class="muted">jiangsu</td><td class="muted">stir_fry</td>
+        <td class="muted">有图 5/5</td><td class="ings">猪肋排</td></tr>
+      <tr><td><input type="radio" name="B2" value="wuxi-braised-pork-ribs"></td>
+        <td class="zh">无锡排骨</td><td class="muted">Wuxi Braised Pork Ribs</td>
+        <td class="muted">zhejiang</td><td class="muted">stir_fry</td>
+        <td class="muted">无图</td><td class="ings">猪肋排</td></tr></tbody></table>
+  </section>
+  <section class="group">
+    <div class="ghead">B3 · 2 道<span class="badge">相似 0.72</span></div>
+    <table><thead><tr><th>选</th><th>中文名</th><th>English</th><th>菜系</th><th>类型</th><th>图片</th><th>主料</th></tr></thead><tbody>
+      <tr><td><input type="radio" name="B3" value="stir-fried-eggs-chinese-chives"></td>
+        <td class="zh">韭菜炒鸡蛋</td><td class="muted">Stir-Fried Eggs with Chinese Chives</td>
+        <td class="muted">home_style</td><td class="muted">stir_fry</td>
+        <td class="muted">有图 6/6</td><td class="ings">虾皮、韭菜、鸡蛋</td></tr>
+      <tr><td><input type="radio" name="B3" value="scrambled-eggs-chinese-chives"></td>
+        <td class="zh">韭菜炒蛋</td><td class="muted">Scrambled Eggs with Chinese Chives</td>
+        <td class="muted">shandong</td><td class="muted">stir_fry</td>
+        <td class="muted">有图 3/3</td><td class="ings">韭菜、鸡蛋</td></tr></tbody></table>
+  </section>
+  <section class="group">
+    <div class="ghead">B4 · 2 道<span class="badge">相似 0.64</span></div>
+    <table><thead><tr><th>选</th><th>中文名</th><th>English</th><th>菜系</th><th>类型</th><th>图片</th><th>主料</th></tr></thead><tbody>
+      <tr><td><input type="radio" name="B4" value="stir-fried-pork-with-mushrooms"></td>
+        <td class="zh">香菇炒肉片</td><td class="muted">Stir-Fried Pork with Mushrooms</td>
+        <td class="muted">cantonese</td><td class="muted">stir_fry</td>
+        <td class="muted">有图 4/4</td><td class="ings">大蒜、里脊、香菇</td></tr>
+      <tr><td><input type="radio" name="B4" value="oyster-mushroom-pork"></td>
+        <td class="zh">平菇炒肉片</td><td class="muted">Stir-Fried Oyster Mushrooms With Pork</td>
+        <td class="muted">shandong</td><td class="muted">stir_fry</td>
+        <td class="muted">有图 4/4</td><td class="ings">大蒜、平菇、里脊、青椒</td></tr></tbody></table>
+  </section>
+  <section class="group">
+    <div class="ghead">B5 · 2 道<span class="badge">相似 0.61</span></div>
+    <table><thead><tr><th>选</th><th>中文名</th><th>English</th><th>菜系</th><th>类型</th><th>图片</th><th>主料</th></tr></thead><tbody>
+      <tr><td><input type="radio" name="B5" value="stir-fried-pork-pickled-mustard"></td>
+        <td class="zh">榨菜肉丝</td><td class="muted">Stir-fried Shredded Pork with Pickled Mustard</td>
+        <td class="muted">sichuan</td><td class="muted">stir_fry</td>
+        <td class="muted">有图 4/4</td><td class="ings">大蒜、榨菜、里脊、青椒</td></tr>
+      <tr><td><input type="radio" name="B5" value="shredded-pork-preserved-mustard-greens"></td>
+        <td class="zh">雪菜肉丝</td><td class="muted">Shredded Pork with Preserved Mustard Greens</td>
+        <td class="muted">zhejiang</td><td class="muted">stir_fry</td>
+        <td class="muted">有图 4/4</td><td class="ings">大蒜、里脊、雪菜</td></tr></tbody></table>
+  </section>
+  <section class="group">
+    <div class="ghead">B6 · 2 道<span class="badge">相似 0.61</span></div>
+    <table><thead><tr><th>选</th><th>中文名</th><th>English</th><th>菜系</th><th>类型</th><th>图片</th><th>主料</th></tr></thead><tbody>
+      <tr><td><input type="radio" name="B6" value="beijing-tomato-egg-noodles"></td>
+        <td class="zh">番茄鸡蛋面</td><td class="muted">Beijing-Style Tomato Egg Noodles</td>
+        <td class="muted">northern</td><td class="muted">noodle</td>
+        <td class="muted">有图 5/5</td><td class="ings">小葱、挂面、番茄、鸡蛋</td></tr>
+      <tr><td><input type="radio" name="B6" value="tomato-egg-ramen"></td>
+        <td class="zh">番茄鸡蛋拉面</td><td class="muted">Tomato &amp; Egg Ramen</td>
+        <td class="muted">home_style</td><td class="muted">boil</td>
+        <td class="muted">有图 4/4</td><td class="ings">拉面、番茄、葱、鸡蛋</td></tr></tbody></table>
+  </section>
+  <section class="group">
+    <div class="ghead">B7 · 2 道<span class="badge">相似 0.59</span></div>
+    <table><thead><tr><th>选</th><th>中文名</th><th>English</th><th>菜系</th><th>类型</th><th>图片</th><th>主料</th></tr></thead><tbody>
+      <tr><td><input type="radio" name="B7" value="stir-fried-pork-with-onions"></td>
+        <td class="zh">洋葱炒肉</td><td class="muted">Stir-Fried Pork with Onions</td>
+        <td class="muted">home_style</td><td class="muted">stir_fry</td>
+        <td class="muted">有图 5/5</td><td class="ings">洋葱、猪里脊、蒜、青椒</td></tr>
+      <tr><td><input type="radio" name="B7" value="stir-fried-beef-with-onions"></td>
+        <td class="zh">洋葱炒牛肉</td><td class="muted">Stir-Fried Beef with Onions</td>
+        <td class="muted">home_style</td><td class="muted">stir_fry</td>
+        <td class="muted"><span class="warn">图 5/6</span></td><td class="ings">姜、洋葱、牛里脊、青椒</td></tr></tbody></table>
+  </section>
+  <section class="group">
+    <div class="ghead">B8 · 2 道<span class="badge">相似 0.59</span></div>
+    <table><thead><tr><th>选</th><th>中文名</th><th>English</th><th>菜系</th><th>类型</th><th>图片</th><th>主料</th></tr></thead><tbody>
+      <tr><td><input type="radio" name="B8" value="shandong-braised-pork-tendon"></td>
+        <td class="zh">葱烧蹄筋</td><td class="muted">Shandong Braised Pork Tendon with Scallion</td>
+        <td class="muted">shandong</td><td class="muted">roast</td>
+        <td class="muted">有图 7/7</td><td class="ings">大葱、大蒜、猪蹄筋、生姜</td></tr>
+      <tr><td><input type="radio" name="B8" value="halal-braised-beef-tendon"></td>
+        <td class="zh">葱烧牛蹄筋</td><td class="muted">Halal Braised Beef Tendon with Scallion</td>
+        <td class="muted">halal</td><td class="muted">roast</td>
+        <td class="muted">有图 5/5</td><td class="ings">大蒜、小葱、牛蹄筋、生姜</td></tr></tbody></table>
+  </section>
+  <section class="group">
+    <div class="ghead">B9 · 2 道<span class="badge">相似 0.58</span></div>
+    <table><thead><tr><th>选</th><th>中文名</th><th>English</th><th>菜系</th><th>类型</th><th>图片</th><th>主料</th></tr></thead><tbody>
+      <tr><td><input type="radio" name="B9" value="sizzling-double-crisp"></td>
+        <td class="zh">油爆双脆</td><td class="muted">Sizzling Double Crisp</td>
+        <td class="muted">shandong</td><td class="muted">stir_fry</td>
+        <td class="muted">有图 7/7</td><td class="ings">冬笋、木耳、猪肚头、蒜、鸡胗</td></tr>
+      <tr><td><input type="radio" name="B9" value="quick-boiled-double-crisps"></td>
+        <td class="zh">汤爆双脆</td><td class="muted">Quick-Boiled Double Crisps</td>
+        <td class="muted">shandong</td><td class="muted">soup</td>
+        <td class="muted">无图</td><td class="ings">猪肚头、香菜、鸡胗</td></tr></tbody></table>
+  </section>
+  <section class="group">
+    <div class="ghead">B10 · 2 道<span class="badge">相似 0.52</span></div>
+    <table><thead><tr><th>选</th><th>中文名</th><th>English</th><th>菜系</th><th>类型</th><th>图片</th><th>主料</th></tr></thead><tbody>
+      <tr><td><input type="radio" name="B10" value="home-style-braised-pork-potatoes"></td>
+        <td class="zh">土豆烧肉</td><td class="muted">Home-Style Braised Pork with Potatoes</td>
+        <td class="muted">home_style</td><td class="muted">roast</td>
+        <td class="muted">有图 5/5</td><td class="ings">土豆、猪五花肉</td></tr>
+      <tr><td><input type="radio" name="B10" value="northeast-braised-beef-potatoes"></td>
+        <td class="zh">土豆烧牛肉</td><td class="muted">Northeast Braised Beef with Potatoes</td>
+        <td class="muted">northeastern</td><td class="muted">roast</td>
+        <td class="muted">有图 4/4</td><td class="ings">土豆、大葱、牛腩、生姜、胡萝卜</td></tr></tbody></table>
+  </section>
+  <section class="group">
+    <div class="ghead">B11 · 2 道<span class="badge">相似 0.47</span></div>
+    <table><thead><tr><th>选</th><th>中文名</th><th>English</th><th>菜系</th><th>类型</th><th>图片</th><th>主料</th></tr></thead><tbody>
+      <tr><td><input type="radio" name="B11" value="hakka-signature-beef-broth"></td>
+        <td class="zh">客家牛肉汤</td><td class="muted">Hakka Signature Beef Broth</td>
+        <td class="muted">hakka</td><td class="muted">soup</td>
+        <td class="muted">有图 6/6</td><td class="ings">牛里脊、牛骨汤、生姜、葱花</td></tr>
+      <tr><td><input type="radio" name="B11" value="hakka-beef-ball-soup"></td>
+        <td class="zh">客家牛肉丸汤</td><td class="muted">Hakka Hand-Beaten Beef Ball Soup</td>
+        <td class="muted">hakka</td><td class="muted">soup</td>
+        <td class="muted">有图 6/6</td><td class="ings">小葱、牛肉丸、白萝卜、芹菜</td></tr></tbody></table>
+  </section><h2 class="sec">C 档 · 5 个类名词<span class="sub">「红烧肉」这类短名被别的菜名完整包含 —— 勾选表示「保留第一行那条，其余算重复」</span></h2>
+  <section class="group">
+    <div class="ghead">C1 · 类名词「豆腐」<span class="badge mid">含此名的 48 道</span></div>
+    <table><thead><tr><th>选</th><th>中文名</th><th>English</th><th>菜系</th><th>类型</th><th>图片</th><th>主料</th></tr></thead><tbody>
+      <tr><td><input type="checkbox" name="c1" value="merge"></td>
+        <td class="zh base">私房豆腐</td><td class="muted">Private House Style Tofu</td>
+        <td class="muted">home_style</td><td class="muted">stir_fry</td>
+        <td class="muted">有图 5/5</td><td class="ings">大蒜、干香菇、老豆腐、青椒</td></tr>
+      <tr><td><input type="radio" name="c1" value="hubei-assorted-tofu-pudding"></td>
+        <td class="zh">什锦豆腐脑</td><td class="muted">Hubei-Style Assorted Tofu Pudding</td>
+        <td class="muted">hubei</td><td class="muted">stir_fry</td>
+        <td class="muted">有图 7/7</td><td class="ings">嫩豆腐、干香菇、木耳、火腿</td></tr>
+      <tr><td><input type="radio" name="c1" value="home-style-clay-pot-tofu"></td>
+        <td class="zh">家常豆腐煲</td><td class="muted">Home-Style Clay Pot Tofu</td>
+        <td class="muted">home_style</td><td class="muted">braise</td>
+        <td class="muted">有图 7/7</td><td class="ings">五花肉片、北豆腐、木耳、红椒、青椒</td></tr>
+      <tr><td><input type="radio" name="c1" value="tofu-crab-roe"></td>
+        <td class="zh">蟹粉豆腐</td><td class="muted">Tofu with Crab Roe</td>
+        <td class="muted">zhejiang</td><td class="muted">stir_fry</td>
+        <td class="muted">有图 7/7</td><td class="ings">嫩豆腐、生姜、葱花</td></tr>
+      <tr><td><input type="radio" name="c1" value="mapo-tofu-mp"></td>
+        <td class="zh">麻婆豆腐</td><td class="muted">Mapo Tofu</td>
+        <td class="muted">sichuan</td><td class="muted">stir_fry</td>
+        <td class="muted">有图 7/7</td><td class="ings">嫩豆腐、猪肉馅</td></tr>
+      <tr><td><input type="radio" name="c1" value="shrimp-roe-tofu"></td>
+        <td class="zh">三虾豆腐</td><td class="muted">Shrimp &amp; Roe Tofu</td>
+        <td class="muted">jiangsu</td><td class="muted">stir_fry</td>
+        <td class="muted">有图 6/6</td><td class="ings">嫩豆腐、虾仁、虾籽、青豆</td></tr>
+      <tr><td><input type="radio" name="c1" value="boshan-tofu-box"></td>
+        <td class="zh">博山豆腐箱</td><td class="muted">Boshan Tofu Box</td>
+        <td class="muted">shandong</td><td class="muted">stir_fry</td>
+        <td class="muted">有图 6/6</td><td class="ings">干香菇、猪五花肉、笋、老豆腐、虾仁</td></tr>
+      <tr><td><input type="radio" name="c1" value="hakka-tofu-casserole"></td>
+        <td class="zh">客家豆腐煲</td><td class="muted">Hakka Tofu Casserole</td>
+        <td class="muted">hakka</td><td class="muted">braise</td>
+        <td class="muted">有图 6/6</td><td class="ings">嫩豆腐、猪肉馅、虾皮、香菇</td></tr>
+      <tr><td><input type="radio" name="c1" value="century-egg-with-silken-tofu"></td>
+        <td class="zh">皮蛋豆腐</td><td class="muted">Century Egg with Silken Tofu</td>
+        <td class="muted">home_style</td><td class="muted">cold</td>
+        <td class="muted">有图 6/6</td><td class="ings">内酯豆腐、小葱、皮蛋</td></tr>
+      <tr><td><input type="radio" name="c1" value="clay-pot-braised-tofu"></td>
+        <td class="zh">砂锅豆腐煲</td><td class="muted">Clay Pot Braised Tofu</td>
+        <td class="muted">home_style</td><td class="muted">braise</td>
+        <td class="muted">有图 6/6</td><td class="ings">北豆腐、木耳、白菜、粉丝、香菇</td></tr>
+      <tr><td><input type="radio" name="c1" value="okra-and-tofu-salad"></td>
+        <td class="zh">秋葵拌豆腐</td><td class="muted">Okra and Tofu Salad</td>
+        <td class="muted">home_style</td><td class="muted">cold</td>
+        <td class="muted">有图 6/6</td><td class="ings">嫩豆腐、小米辣、秋葵、蒜</td></tr>
+      <tr><td><input type="radio" name="c1" value="stinky-tofu"></td>
+        <td class="zh">臭豆腐</td><td class="muted">Stinky Tofu</td>
+        <td class="muted">hunan</td><td class="muted">stir_fry</td>
+        <td class="muted">有图 6/6</td><td class="ings">小米辣、小葱、臭豆腐、蒜、香菜</td></tr>
+      <tr><td><input type="radio" name="c1" value="pan-fried-tofu"></td>
+        <td class="zh">锅塌豆腐</td><td class="muted">Pan-Fried Tofu</td>
+        <td class="muted">shandong</td><td class="muted">stir_fry</td>
+        <td class="muted">有图 6/6</td><td class="ings">北豆腐、大葱、猪肉馅、生姜、鸡蛋</td></tr>
+      <tr><td><input type="radio" name="c1" value="fish-tofu"></td>
+        <td class="zh">鱼豆腐</td><td class="muted">Fish Tofu</td>
+        <td class="muted">home_style</td><td class="muted">stir_fry</td>
+        <td class="muted">有图 6/6</td><td class="ings">大蒜、青椒、鱼豆腐</td></tr>
+      <tr><td><input type="radio" name="c1" value="spicy-pepper-dried-tofu-sheets"></td>
+        <td class="zh">尖椒干豆腐</td><td class="muted">Spicy Pepper with Dried Tofu Sheets</td>
+        <td class="muted">northeastern</td><td class="muted">braise</td>
+        <td class="muted">有图 5/5</td><td class="ings">小葱、尖椒、干豆腐、蒜</td></tr>
+      <tr><td><input type="radio" name="c1" value="huizhou-hairy-tofu"></td>
+        <td class="zh">徽州毛豆腐</td><td class="muted">Huizhou Hairy Tofu</td>
+        <td class="muted">anhui</td><td class="muted">stir_fry</td>
+        <td class="muted">有图 5/5</td><td class="ings">姜、毛豆腐、蒜苗</td></tr>
+      <tr><td><input type="radio" name="c1" value="guizhou-grilled-tofu-pockets"></td>
+        <td class="zh">恋爱豆腐果</td><td class="muted">Guizhou Grilled Tofu Pockets</td>
+        <td class="muted">guizhou</td><td class="muted">pan_fry</td>
+        <td class="muted"><span class="warn">图 5/6</span></td><td class="ings">折耳根、油豆腐、葱花、蒜末、香菜</td></tr>
+      <tr><td><input type="radio" name="c1" value="masterpiece-tofu-shreds-soup"></td>
+        <td class="zh">文思豆腐</td><td class="muted">Masterpiece Tofu Shreds Soup</td>
+        <td class="muted">jiangsu</td><td class="muted">soup</td>
+        <td class="muted">有图 5/5</td><td class="ings">嫩豆腐、干香菇、金华火腿、青菜心、鸡胸肉</td></tr>
+      <tr><td><input type="radio" name="c1" value="hui-fermented-tofu"></td>
+        <td class="zh">毛豆腐</td><td class="muted">Hui-Style Fermented Tofu</td>
+        <td class="muted">anhui</td><td class="muted">stir_fry</td>
+        <td class="muted">有图 5/5</td><td class="ings">姜、毛豆腐、蒜苗</td></tr>
+      <tr><td><input type="radio" name="c1" value="mi-doufu-rice-tofu-jelly"></td>
+        <td class="zh">米豆腐</td><td class="muted">Mi Doufu (Rice Tofu Jelly)</td>
+        <td class="muted">home_style</td><td class="muted">stir_fry</td>
+        <td class="muted">有图 5/5</td><td class="ings">大米、肉末、酸豆角、食用石灰水</td></tr>
+      <tr><td><input type="radio" name="c1" value="vegetarian-mapo-tofu"></td>
+        <td class="zh">素麻婆豆腐</td><td class="muted">Vegetarian Mapo Tofu</td>
+        <td class="muted">sichuan</td><td class="muted">stir_fry</td>
+        <td class="muted">有图 5/5</td><td class="ings">嫩豆腐、豆豉、香菇</td></tr>
+      <tr><td><input type="radio" name="c1" value="hakka-stuffed-tofu"></td>
+        <td class="zh">酿豆腐</td><td class="muted">Hakka-Style Stuffed Tofu</td>
+        <td class="muted">hakka</td><td class="muted">stir_fry</td>
+        <td class="muted">有图 5/5</td><td class="ings">嫩豆腐、干香菇、猪肉馅、虾米、鲮鱼肉</td></tr>
+      <tr><td><input type="radio" name="c1" value="tofu-stuffed-shrimp-paste"></td>
+        <td class="zh">镜箱豆腐</td><td class="muted">Tofu Stuffed with Shrimp Paste</td>
+        <td class="muted">zhejiang</td><td class="muted">stir_fry</td>
+        <td class="muted">有图 5/5</td><td class="ings">嫩豆腐、干香菇、猪肉馅、笋、虾仁</td></tr>
+      <tr><td><input type="radio" name="c1" value="northeast-style-scrambled-tofu"></td>
+        <td class="zh">鸡刨豆腐</td><td class="muted">Northeast-Style Scrambled Tofu</td>
+        <td class="muted">northeastern</td><td class="muted">braise</td>
+        <td class="muted">有图 5/5</td><td class="ings">嫩豆腐、小葱、蒜、鸡蛋</td></tr>
+      <tr><td><input type="radio" name="c1" value="hakka-stuffed-tofu-2"></td>
+        <td class="zh">客家酿豆腐</td><td class="muted">Hakka Stuffed Tofu</td>
+        <td class="muted">hakka</td><td class="muted">stir_fry</td>
+        <td class="muted">有图 4/4</td><td class="ings">北豆腐、小葱、干香菇、猪肉末、虾米</td></tr>
+      <tr><td><input type="radio" name="c1" value="silken-tofu-with-scallions"></td>
+        <td class="zh">小葱拌豆腐</td><td class="muted">Silken Tofu with Scallions</td>
+        <td class="muted">shandong</td><td class="muted">cold</td>
+        <td class="muted">有图 4/4</td><td class="ings">小葱、豆腐</td></tr>
+      <tr><td><input type="radio" name="c1" value="rolled-tofu-skin-scallions"></td>
+        <td class="zh">干豆腐卷大葱</td><td class="muted">Rolled Thin Tofu Skin With Scallions</td>
+        <td class="muted">northeastern</td><td class="muted">cold</td>
+        <td class="muted">有图 4/4</td><td class="ings">大葱、干豆腐、香菜、黄瓜</td></tr>
+      <tr><td><input type="radio" name="c1" value="dry-pot-firm-tofu"></td>
+        <td class="zh">干锅干页豆腐</td><td class="muted">Dry Pot Firm Tofu</td>
+        <td class="muted">sichuan</td><td class="muted">stir_fry</td>
+        <td class="muted">有图 4/4</td><td class="ings">干页豆腐、洋葱、青椒</td></tr>
+      <tr><td><input type="radio" name="c1" value="pingqiao-tofu"></td>
+        <td class="zh">平桥豆腐</td><td class="muted">Pingqiao Tofu</td>
+        <td class="muted">jiangsu</td><td class="muted">stir_fry</td>
+        <td class="muted">有图 4/4</td><td class="ings">嫩豆腐、淀粉、火腿、虾仁、鸡清汤</td></tr>
+      <tr><td><input type="radio" name="c1" value="clay-pot-soft-shell-crab-tofu"></td>
+        <td class="zh">梭子蟹豆腐煲</td><td class="muted">Clay Pot Soft-shell Crab and Tofu</td>
+        <td class="muted">fujian</td><td class="muted">braise</td>
+        <td class="muted">有图 4/4</td><td class="ings">嫩豆腐、小葱、梭子蟹、生姜</td></tr>
+      <tr><td><input type="radio" name="c1" value="seaweed-and-tofu-soup"></td>
+        <td class="zh">海带豆腐汤</td><td class="muted">Seaweed and Tofu Soup</td>
+        <td class="muted">cantonese</td><td class="muted">soup</td>
+        <td class="muted">有图 4/4</td><td class="ings">大蒜、嫩豆腐、小葱、海带</td></tr>
+      <tr><td><input type="radio" name="c1" value="oyster-tofu-soup"></td>
+        <td class="zh">海蛎豆腐汤</td><td class="muted">Oyster &amp; Tofu Soup</td>
+        <td class="muted">fujian</td><td class="muted">soup</td>
+        <td class="muted">有图 4/4</td><td class="ings">大蒜、嫩豆腐、海蛎、芹菜</td></tr>
+      <tr><td><input type="radio" name="c1" value="shandong-braised-tofu-tomato"></td>
+        <td class="zh">番茄烧豆腐</td><td class="muted">Shandong-Style Braised Tofu in Tomato Sauce</td>
+        <td class="muted">shandong</td><td class="muted">roast</td>
+        <td class="muted">有图 4/4</td><td class="ings">北豆腐、大蒜、小葱、猪肉馅、番茄</td></tr>
+      <tr><td><input type="radio" name="c1" value="braised-tofu"></td>
+        <td class="zh">红烧豆腐</td><td class="muted">Red-Braised Tofu</td>
+        <td class="muted">home_style</td><td class="muted">braise</td>
+        <td class="muted">有图 4/4</td><td class="ings">老豆腐、蒜</td></tr>
+      <tr><td><input type="radio" name="c1" value="sichuan-mapo-tofu"></td>
+        <td class="zh">肉末豆腐</td><td class="muted">Sichuan Mapo Tofu</td>
+        <td class="muted">sichuan</td><td class="muted">stir_fry</td>
+        <td class="muted">有图 4/4</td><td class="ings">大蒜、嫩豆腐、小葱、猪肉馅</td></tr>
+      <tr><td><input type="radio" name="c1" value="tofu-fa"></td>
+        <td class="zh">豆腐花</td><td class="muted">Tofu Pudding (Tofu Fa)</td>
+        <td class="muted">cantonese</td><td class="muted">dessert</td>
+        <td class="muted">有图 4/4</td><td class="ings">内酯、姜糖水、无糖豆浆</td></tr>
+      <tr><td><input type="radio" name="c1" value="frozen-tofu"></td>
+        <td class="zh">冻豆腐</td><td class="muted">Frozen Tofu</td>
+        <td class="muted">home_style</td><td class="muted">cold</td>
+        <td class="muted"><span class="warn">图 3/5</span></td><td class="ings">冻豆腐、蒜泥、香菜末</td></tr>
+      <tr><td><input type="radio" name="c1" value="steamed-tofu"></td>
+        <td class="zh">清蒸豆腐</td><td class="muted">Steamed Tofu</td>
+        <td class="muted">zen</td><td class="muted">steam</td>
+        <td class="muted">有图 3/3</td><td class="ings">嫩豆腐、葱</td></tr>
+      <tr><td><input type="radio" name="c1" value="cabbage-tofu-stew"></td>
+        <td class="zh">白菜炖豆腐</td><td class="muted">Cabbage Tofu Stew</td>
+        <td class="muted">home_style</td><td class="muted">stew</td>
+        <td class="muted">有图 3/3</td><td class="ings">姜、白菜、老豆腐</td></tr>
+      <tr><td><input type="radio" name="c1" value="crown-daisy-tofu-soup"></td>
+        <td class="zh">茼蒿豆腐汤</td><td class="muted">Crown Daisy &amp; Tofu Soup</td>
+        <td class="muted">shandong</td><td class="muted">soup</td>
+        <td class="muted">有图 3/3</td><td class="ings">大蒜、嫩豆腐、茼蒿</td></tr>
+      <tr><td><input type="radio" name="c1" value="mushroom-tofu-soup"></td>
+        <td class="zh">菌菇豆腐汤</td><td class="muted">Mushroom Tofu Soup</td>
+        <td class="muted">zen</td><td class="muted">soup</td>
+        <td class="muted">有图 3/3</td><td class="ings">姜、嫩豆腐、香菇</td></tr>
+      <tr><td><input type="radio" name="c1" value="tofu-soup"></td>
+        <td class="zh">豆腐羹</td><td class="muted">Silken Tofu Soup</td>
+        <td class="muted">zen</td><td class="muted">soup</td>
+        <td class="muted">有图 3/3</td><td class="ings">嫩豆腐、淀粉、葱</td></tr>
+      <tr><td><input type="radio" name="c1" value="cantonese-tofu-and-greens-soup"></td>
+        <td class="zh">豆腐青菜汤</td><td class="muted">Cantonese Tofu and Greens Soup</td>
+        <td class="muted">cantonese</td><td class="muted">soup</td>
+        <td class="muted">有图 3/3</td><td class="ings">嫩豆腐、青菜</td></tr>
+      <tr><td><input type="radio" name="c1" value="fish-head-tofu-soup"></td>
+        <td class="zh">鱼头豆腐汤</td><td class="muted">Fish Head and Tofu Soup</td>
+        <td class="muted">zhejiang</td><td class="muted">soup</td>
+        <td class="muted">有图 3/3</td><td class="ings">姜、嫩豆腐、胖头鱼头、葱</td></tr>
+      <tr><td><input type="radio" name="c1" value="crucian-carp-tofu-soup"></td>
+        <td class="zh">鲫鱼豆腐汤</td><td class="muted">Crucian Carp and Tofu Soup</td>
+        <td class="muted">zhejiang</td><td class="muted">soup</td>
+        <td class="muted">有图 3/3</td><td class="ings">嫩豆腐、小葱、生姜、鲫鱼</td></tr>
+      <tr><td><input type="radio" name="c1" value="qingyan-braised-tofu"></td>
+        <td class="zh">青岩豆腐</td><td class="muted">Qingyan Braised Tofu</td>
+        <td class="muted">yunnan</td><td class="muted">stir_fry</td>
+        <td class="muted"><span class="warn">图 1/6</span></td><td class="ings">折耳根、老豆腐</td></tr>
+      <tr><td><input type="radio" name="c1" value="jianshui-grilled-tofu"></td>
+        <td class="zh">建水烧豆腐</td><td class="muted">Jianshui Grilled Tofu</td>
+        <td class="muted">yunnan</td><td class="muted">roast</td>
+        <td class="muted">无图</td><td class="ings">老豆腐</td></tr>
+      <tr><td><input type="radio" name="c1" value="shexian-silken-tofu"></td>
+        <td class="zh">歙县豆腐脑髓</td><td class="muted">Shexian Silken Tofu</td>
+        <td class="muted">anhui</td><td class="muted">stir_fry</td>
+        <td class="muted">无图</td><td class="ings">嫩豆腐、干香菇、火腿、猪五花肉、笋干</td></tr>
+      <tr><td><input type="radio" name="c1" value="clay-pot-fish-head-tofu-stew"></td>
+        <td class="zh">砂锅鱼头豆腐</td><td class="muted">Clay Pot Fish Head &amp; Tofu Stew</td>
+        <td class="muted">zhejiang</td><td class="muted">soup</td>
+        <td class="muted">无图</td><td class="ings">嫩豆腐、小葱、生姜、胖头鱼头</td></tr></tbody></table>
+  </section>
+  <section class="group">
+    <div class="ghead">C2 · 类名词「包子」<span class="badge mid">含此名的 7 道</span></div>
+    <table><thead><tr><th>选</th><th>中文名</th><th>English</th><th>菜系</th><th>类型</th><th>图片</th><th>主料</th></tr></thead><tbody>
+      <tr><td><input type="checkbox" name="c2" value="merge"></td>
+        <td class="zh base">包子</td><td class="muted">Steamed Pork Buns (Bao Zi)</td>
+        <td class="muted">northern</td><td class="muted">steam</td>
+        <td class="muted">有图 4/4</td><td class="ings">猪肉末、白菜、酵母、高筋面粉</td></tr>
+      <tr><td><input type="radio" name="c2" value="three-dice-vegetable-buns"></td>
+        <td class="zh">三丁包子</td><td class="muted">Three-Dice Vegetable Buns</td>
+        <td class="muted">jiangsu</td><td class="muted">steam</td>
+        <td class="muted">有图 8/8</td><td class="ings">中筋面粉、温水、猪五花肉、酵母、鸡胸肉</td></tr>
+      <tr><td><input type="radio" name="c2" value="vegetable-steamed-bun"></td>
+        <td class="zh">菜包子</td><td class="muted">Vegetable Steamed Bun</td>
+        <td class="muted">home_style</td><td class="muted">steam</td>
+        <td class="muted">有图 6/6</td><td class="ings">小白菜、粉丝、酵母、面粉、香菇</td></tr>
+      <tr><td><input type="radio" name="c2" value="han-baozi-steamed-pork-buns"></td>
+        <td class="zh">韩包子</td><td class="muted">Han Baozi (Steamed Pork Buns)</td>
+        <td class="muted">sichuan</td><td class="muted">steam</td>
+        <td class="muted">有图 6/6</td><td class="ings">中筋面粉、温水、猪五花肉、虾仁、酵母</td></tr>
+      <tr><td><input type="radio" name="c2" value="xinjiang-baked-lamb-dumplings"></td>
+        <td class="zh">烤包子</td><td class="muted">Xinjiang Baked Lamb Dumplings</td>
+        <td class="muted">home_style</td><td class="muted">steam</td>
+        <td class="muted">有图 5/5</td><td class="ings">洋葱、羊肉馅、面粉</td></tr>
+      <tr><td><input type="radio" name="c2" value="steamed-meat-buns"></td>
+        <td class="zh">肉包子</td><td class="muted">Steamed Meat Buns</td>
+        <td class="muted">home_style</td><td class="muted">steam</td>
+        <td class="muted">有图 5/5</td><td class="ings">猪肉馅、生姜、皮冻、面粉、香葱</td></tr>
+      <tr><td><input type="radio" name="c2" value="xinjiang-thin-skin-mantou"></td>
+        <td class="zh">薄皮包子</td><td class="muted">Xinjiang Thin-Skin Mantou</td>
+        <td class="muted">home_style</td><td class="muted">steam</td>
+        <td class="muted">有图 5/5</td><td class="ings">洋葱、羊尾油、羊肉馅、饺子皮</td></tr>
+      <tr><td><input type="radio" name="c2" value="xinjiang-thin-crust-lamb-dumplings"></td>
+        <td class="zh">新疆薄皮包子</td><td class="muted">Xinjiang Thin-Crust Lamb Dumplings</td>
+        <td class="muted">xinjiang</td><td class="muted">steam</td>
+        <td class="muted"><span class="warn">图 4/6</span></td><td class="ings">洋葱、羊肉馅、面粉</td></tr></tbody></table>
+  </section>
+  <section class="group">
+    <div class="ghead">C3 · 类名词「红烧肉」<span class="badge mid">含此名的 6 道</span></div>
+    <table><thead><tr><th>选</th><th>中文名</th><th>English</th><th>菜系</th><th>类型</th><th>图片</th><th>主料</th></tr></thead><tbody>
+      <tr><td><input type="checkbox" name="c3" value="merge"></td>
+        <td class="zh base">红烧肉</td><td class="muted">Red Braised Pork Belly</td>
+        <td class="muted">shanghainese</td><td class="muted">roast</td>
+        <td class="muted">有图 6/6</td><td class="ings">猪五花肉</td></tr>
+      <tr><td><input type="radio" name="c3" value="grandmas-red-braised-pork"></td>
+        <td class="zh">外婆红烧肉</td><td class="muted">Grandma&#x27;s Red-Braised Pork</td>
+        <td class="muted">home_style</td><td class="muted">roast</td>
+        <td class="muted">有图 6/6</td><td class="ings">猪五花肉</td></tr>
+      <tr><td><input type="radio" name="c3" value="braised-pork-belly-potatoes"></td>
+        <td class="zh">红烧肉炖土豆</td><td class="muted">Braised Pork Belly with Potatoes</td>
+        <td class="muted">shanghainese</td><td class="muted">roast</td>
+        <td class="muted">有图 6/6</td><td class="ings">土豆、猪五花肉</td></tr>
+      <tr><td><input type="radio" name="c3" value="mao-style-red-braised-pork"></td>
+        <td class="zh">毛氏红烧肉</td><td class="muted">Mao-Style Red-Braised Pork</td>
+        <td class="muted">hunan</td><td class="muted">roast</td>
+        <td class="muted">有图 5/5</td><td class="ings">猪五花肉</td></tr>
+      <tr><td><input type="radio" name="c3" value="braised-pork-belly-tofu-knots"></td>
+        <td class="zh">红烧肉百叶结</td><td class="muted">Braised Pork Belly with Tofu Knots</td>
+        <td class="muted">shanghainese</td><td class="muted">roast</td>
+        <td class="muted">有图 5/5</td><td class="ings">五花肉、百叶结</td></tr>
+      <tr><td><input type="radio" name="c3" value="shanghainese-red-braised-pork"></td>
+        <td class="zh">本帮红烧肉</td><td class="muted">Shanghainese Red-Braised Pork</td>
+        <td class="muted">shanghainese</td><td class="muted">braise</td>
+        <td class="muted">有图 4/4</td><td class="ings">五花肉</td></tr>
+      <tr><td><input type="radio" name="c3" value="shandong-braised-pork-belly"></td>
+        <td class="zh">鲁味红烧肉</td><td class="muted">Shandong Braised Pork Belly</td>
+        <td class="muted">shandong</td><td class="muted">roast</td>
+        <td class="muted">无图</td><td class="ings">猪五花肉</td></tr></tbody></table>
+  </section>
+  <section class="group">
+    <div class="ghead">C4 · 类名词「土豆丝」<span class="badge mid">含此名的 5 道</span></div>
+    <table><thead><tr><th>选</th><th>中文名</th><th>English</th><th>菜系</th><th>类型</th><th>图片</th><th>主料</th></tr></thead><tbody>
+      <tr><td><input type="checkbox" name="c4" value="merge"></td>
+        <td class="zh base">土豆丝</td><td class="muted">Shredded Potato Stir-Fry</td>
+        <td class="muted">home_style</td><td class="muted">stir_fry</td>
+        <td class="muted">有图 4/4</td><td class="ings">土豆</td></tr>
+      <tr><td><input type="radio" name="c4" value="northeast-potato-pork-stir-fry"></td>
+        <td class="zh">东北土豆丝炒肉</td><td class="muted">Northeast Shredded Potato and Pork Stir-Fry</td>
+        <td class="muted">northeastern</td><td class="muted">stir_fry</td>
+        <td class="muted">有图 6/6</td><td class="ings">土豆、小葱、猪里脊、蒜、青椒</td></tr>
+      <tr><td><input type="radio" name="c4" value="hot-and-sour-shredded-potato-mp"></td>
+        <td class="zh">酸辣土豆丝</td><td class="muted">Hot &amp; Sour Shredded Potato</td>
+        <td class="muted">sichuan</td><td class="muted">stir_fry</td>
+        <td class="muted">有图 6/6</td><td class="ings">土豆</td></tr>
+      <tr><td><input type="radio" name="c4" value="shredded-potato-with-green-pepper"></td>
+        <td class="zh">青椒土豆丝</td><td class="muted">Shredded Potato With Green Pepper</td>
+        <td class="muted">home_style</td><td class="muted">stir_fry</td>
+        <td class="muted">有图 5/5</td><td class="ings">土豆、小葱、蒜、青椒</td></tr>
+      <tr><td><input type="radio" name="c4" value="cold-shredded-potato-salad"></td>
+        <td class="zh">凉拌土豆丝</td><td class="muted">Cold Shredded Potato Salad</td>
+        <td class="muted">northern</td><td class="muted">cold</td>
+        <td class="muted">有图 3/3</td><td class="ings">土豆、大蒜、红椒、青椒</td></tr>
+      <tr><td><input type="radio" name="c4" value="shredded-potato-wraps"></td>
+        <td class="zh">土豆丝卷饼</td><td class="muted">Shredded Potato Wraps</td>
+        <td class="muted">home_style</td><td class="muted">pan_fry</td>
+        <td class="muted">有图 3/3</td><td class="ings">土豆、胡萝卜、青椒、面粉</td></tr></tbody></table>
+  </section>
+  <section class="group">
+    <div class="ghead">C5 · 类名词「牛肉面」<span class="badge mid">含此名的 5 道</span></div>
+    <table><thead><tr><th>选</th><th>中文名</th><th>English</th><th>菜系</th><th>类型</th><th>图片</th><th>主料</th></tr></thead><tbody>
+      <tr><td><input type="checkbox" name="c5" value="merge"></td>
+        <td class="zh base">牛肉面</td><td class="muted">Braised Beef Noodle Soup</td>
+        <td class="muted">northern</td><td class="muted">boil</td>
+        <td class="muted">有图 3/3</td><td class="ings">姜、牛腱、面条</td></tr>
+      <tr><td><input type="radio" name="c5" value="braised-beef-noodles"></td>
+        <td class="zh">红烧牛肉面</td><td class="muted">Braised Beef Noodles</td>
+        <td class="muted">northwestern</td><td class="muted">noodle</td>
+        <td class="muted">有图 5/5</td><td class="ings">牛腩、生姜、番茄、青菜、面条</td></tr>
+      <tr><td><input type="radio" name="c5" value="xiangyang-beef-noodles"></td>
+        <td class="zh">襄阳牛肉面</td><td class="muted">Xiangyang Spicy Beef Rice Noodles</td>
+        <td class="muted">hubei</td><td class="muted">noodle</td>
+        <td class="muted">有图 5/5</td><td class="ings">牛油、牛肉、碱水面</td></tr>
+      <tr><td><input type="radio" name="c5" value="northwestern-beef-noodle-flakes-soup"></td>
+        <td class="zh">牛肉面片汤</td><td class="muted">Northwestern Beef Noodle Flakes Soup</td>
+        <td class="muted">northwestern</td><td class="muted">noodle</td>
+        <td class="muted">有图 4/4</td><td class="ings">土豆、牛肉片、西红柿、青菜、面片</td></tr>
+      <tr><td><input type="radio" name="c5" value="lanzhou-halal-beef-noodle"></td>
+        <td class="zh">兰州牛肉面</td><td class="muted">Lanzhou Halal Beef Noodle Soup</td>
+        <td class="muted">halal</td><td class="muted">noodle</td>
+        <td class="muted">有图 3/3</td><td class="ings">姜、牛腩、白萝卜、面条</td></tr>
+      <tr><td><input type="radio" name="c5" value="halal-beef-noodle-soup"></td>
+        <td class="zh">清真牛肉面</td><td class="muted">Halal Beef Noodle Soup</td>
+        <td class="muted">halal</td><td class="muted">noodle</td>
+        <td class="muted">无图</td><td class="ings">牛棒骨、牛肉汤、牛腩、白萝卜、面条</td></tr></tbody></table>
+  </section></main>
+<div id="bar"><span id="cnt">已选 0 组</span><code id="out">—</code></div>
+<script>
+const rs=[...document.querySelectorAll('input[type=radio]')];
+const cs=[...document.querySelectorAll('input[type=checkbox]')];
+function sync(){
+  const pick={}, merges=[];
+  rs.forEach(i=>{if(i.checked) pick[i.name]=i.value;});
+  cs.forEach(i=>{if(i.checked) merges.push('c'+i.name.slice(1)+':merge');});
+  const keys=Object.keys(pick).sort();
+  document.getElementById('cnt').textContent='已选 '+(keys.length+merges.length)+' 组';
+  document.getElementById('out').textContent = (keys.length||merges.length)
+    ? keys.map(k=>k+':'+pick[k]).concat(merges).join('  ') : '—';
+}
+[...rs,...cs].forEach(i=>i.addEventListener('change',sync));
+document.getElementById('copy').onclick=()=>{
+  const t=document.getElementById('out').textContent;
+  navigator.clipboard.writeText(t).then(()=>{
+    const b=document.getElementById('copy'); b.textContent='已复制';
+    setTimeout(()=>b.textContent='复制选择',1200);
+  });
+};
+sync();
+</script></body></html>

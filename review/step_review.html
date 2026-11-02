@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Wokmaster 步骤图复核（0 道）</title>
+<style>
+  :root{--bg:#f6f7f9;--card:#fff;--line:#e3e6ea;--ink:#1c2126;--mute:#6b7683;
+        --accent:#c0392b;--weak:#e08a00;--strong:#2e7d32}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+       font:14px/1.5 -apple-system,"Segoe UI","Microsoft YaHei",sans-serif}
+  header{position:sticky;top:0;z-index:9;background:#fff;border-bottom:1px solid var(--line);
+         padding:12px 20px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+  h1{font-size:16px;margin:0}
+  .hint{color:var(--mute);font-size:13px}
+  button{background:var(--accent);color:#fff;border:0;border-radius:6px;
+         padding:8px 14px;font-size:13px;cursor:pointer}
+  button.ghost{background:#fff;color:var(--ink);border:1px solid var(--line)}
+  main{padding:16px 20px 80px;display:grid;gap:14px;
+       grid-template-columns:repeat(auto-fill,minmax(420px,1fr))}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:10px;
+        padding:12px;cursor:pointer;display:block}
+  .card:hover{border-color:#bfc7d1}
+  .card.picked{border-color:var(--accent);box-shadow:0 0 0 2px rgba(192,57,43,.12)}
+  .head{display:flex;gap:10px;align-items:flex-start}
+  .head input{margin-top:4px;width:16px;height:16px}
+  .zh{font-weight:600;font-size:15px}
+  .meta{font-weight:400;font-size:11px;color:var(--mute);margin-left:6px}
+  .en{color:var(--mute);font-size:12px}
+  .src{color:#8a5a00;font-size:12px;margin-top:2px}
+  .tag{margin-left:auto;font-size:11px;padding:2px 8px;border-radius:99px;white-space:nowrap}
+  .tag.weak{background:#fff4e0;color:var(--weak)}
+  .tag.strong{background:#e8f5e9;color:var(--strong)}
+  .thumbs{display:flex;gap:6px;overflow-x:auto;margin-top:10px}
+  .thumbs img{height:92px;border-radius:6px;border:1px solid var(--line);flex:0 0 auto}
+  .none{color:var(--mute);font-size:12px}
+  .empty{background:#fff;border:1px solid var(--line);border-radius:10px;padding:40px;
+         text-align:center;color:var(--mute);grid-column:1/-1}
+  #bar{position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:1px solid var(--line);
+       padding:10px 20px;display:flex;gap:12px;align-items:center;font-size:13px}
+  code{background:#f0f2f5;padding:2px 6px;border-radius:4px;font-size:12px;
+       white-space:pre-wrap;word-break:break-all;max-height:38px;overflow:auto;flex:1}
+</style></head><body>
+<header>
+  <h1>步骤图复核</h1>
+  <span class="hint">勾选确认是同一道菜的（缩略图能看出食材和做法），再点「复制清单」发我</span>
+  <button class="ghost" id="all">全选</button>
+  <button class="ghost" id="none">清空</button>
+</header>
+<main id="grid"><div class="empty">没有待复核的条目 —— 全部处理完了。<br><span style="font-size:12px">裁决过的菜都已记录，不会再出现在这里。</span></div></main>
+<div id="bar"><span id="cnt">已选 0 道</span><code id="out">—</code>
+  <button id="copy">复制清单</button></div>
+<script>
+const cards=[...document.querySelectorAll('.card')];
+let n=0;
+function sync(){
+  n=0;
+  cards.forEach(c=>{const on=c.querySelector('.pick').checked;
+    c.classList.toggle('picked',on); if(on)n++;});
+  document.getElementById('cnt').textContent='已选 '+n+' 道';
+  document.getElementById('out').textContent = n
+    ? cards.filter(c=>c.querySelector('.pick').checked).map(c=>c.dataset.slug).join(',')
+    : '—';
+}
+cards.forEach(c=>c.addEventListener('click',e=>{
+  if(e.target.tagName==='INPUT'){sync();return;}
+  const b=c.querySelector('.pick'); b.checked=!b.checked; sync();
+}));
+document.getElementById('all').onclick=()=>{cards.forEach(c=>c.querySelector('.pick').checked=true);sync();};
+document.getElementById('none').onclick=()=>{cards.forEach(c=>c.querySelector('.pick').checked=false);sync();};
+document.getElementById('copy').onclick=()=>{
+  const t=document.getElementById('out').textContent;
+  navigator.clipboard.writeText(t).then(()=>{
+    const b=document.getElementById('copy'); b.textContent='已复制';
+    setTimeout(()=>b.textContent='复制清单',1200);
+  });
+};
+sync();
+</script></body></html>
